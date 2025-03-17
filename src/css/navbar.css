@@ -30,14 +30,14 @@
 }
 
 .Navbar_MenuImg {
-  width: 45px;
+  width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .Navbar_MenuImg img {
-  width: 100%;
+  width: 40px;
 }
 
 .Navbar_MenuText {
@@ -54,16 +54,16 @@
   align-items: center;
 }
 
-.Navbar_AccountDiv{
+.Navbar_AccountDiv {
   display: flex;
   align-items: center;
   padding-left: 5px;
   border-left: 1px solid rgba(0, 0, 0, 0.308);
 }
 
-.Navbar_AccountDiv_Circle{
+.Navbar_AccountDiv_Circle {
   background-color: var(--primary-color-darker);
-  color:white;
+  color: white;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -75,12 +75,12 @@
   cursor: pointer;
 }
 
-.Navbar_AccountDiv_Email{
+.Navbar_AccountDiv_Email {
   margin-right: 10px;
 }
 
-.Navbar_AccountDiv_Settings{
-  color:gray;
+.Navbar_AccountDiv_Settings {
+  color: gray;
   margin-right: 5px;
   display: flex;
   justify-content: center;
@@ -90,7 +90,11 @@
 
 
 
-
+@media screen and (max-width: 950px) {
+  .Navbar_AccountDiv {
+    display: none;
+  }
+}
 
 
 
