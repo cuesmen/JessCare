@@ -7,6 +7,7 @@ import '../css/components.css'
 import '../css/alert.css'
 import '../css/loader.css'
 import '../css/navbar.css'
+import '../css/pazienti.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

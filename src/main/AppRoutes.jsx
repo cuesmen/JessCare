@@ -6,7 +6,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
-import Pazienti from "../pages/Pazienti";
+import Pazienti from "../pages/Pazienti/Pazienti";
 import Appuntamenti from "../pages/Appuntamenti";
 import Login from '../pages/Login';
 import { AuthProvider, useAuth } from '../context/AuthContext';

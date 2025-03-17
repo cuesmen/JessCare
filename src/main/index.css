@@ -151,3 +151,10 @@ html, body {
 .c-bold{
   font-weight: 650;
 }
+
+.MainDiv{
+  width: 100%;
+  height: calc(100vh - 50px);
+  padding-left: 50px;
+  background-color: rgb(240,240,240);
+}
