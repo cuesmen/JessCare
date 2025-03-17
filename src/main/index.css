@@ -1,0 +1,153 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgb(22, 22, 22);
+  background-color:rgb(250, 250, 250);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --primary-color: #73c9a5;
+  --primary-color-darker: #46a57d;
+  --primary-color-darker-sidebar: #39746a;
+  --primary-color-darker-sidebar-hover: #2b524b;
+
+  --sidebar-transition: all 0.2s ease-in-out;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+.bg-red{
+  background-color: red;
+}
+
+.flex{
+  display: flex;
+}
+
+.row{
+  flex-direction: row;
+}
+
+.centerx{
+  justify-content: center;
+}
+
+.centery{
+  align-items: center;
+}
+
+.width100{
+  width: 100%;
+}
+
+.no-scroll {
+  overflow: hidden !important;
+}
+
+.overlay {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Puoi modificarne l'opacità o renderlo trasparente */
+  z-index: 95; /* Assicurati che sia sotto il Navbar e la Sidebar */
+  touch-action: none;
+}
+
+.IconButton{
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 17px;
+  cursor: pointer;
+  width: 90%;
+  padding: 6px 0px 6px 6px;
+  margin-left: 10px;
+  border-radius: 5px;
+  color: rgb(250, 250, 250);
+}
+
+.IconButton:hover {
+  background-color: rgb(56, 56, 56);
+}
+
+.IconButton_Icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.c-primary{
+  color:var(--primary-color);
+}
+
+.c-primary-darker{
+  color:var(--primary-color-darker);
+}
+
+.c-bold{
+  font-weight: 650;
+}

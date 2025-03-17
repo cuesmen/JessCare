@@ -1,0 +1,218 @@
+.Navbar_MainDiv {
+  background-color: white;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.062);
+  padding: 10px;
+  width: 100%;
+  color: rgb(29, 29, 29);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 100;
+}
+
+.Navbar_MenuBtn {
+  font-size: 25px;
+  background-color: rgb(255, 255, 255);
+  width: 30px;
+  border-radius: 5px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  transition: var(--sidebar-transition);
+}
+
+.Navbar_MenuBtn:hover {
+  background-color: rgb(216, 216, 216);
+  transition: var(--sidebar-transition);
+}
+
+.Navbar_MenuImg {
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Navbar_MenuImg img {
+  width: 100%;
+}
+
+.Navbar_MenuText {
+  text-transform: capitalize;
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.Navbar_AccountDiv_Wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.Navbar_AccountDiv{
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+  border-left: 1px solid rgba(0, 0, 0, 0.308);
+}
+
+.Navbar_AccountDiv_Circle{
+  background-color: var(--primary-color-darker);
+  color:white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.Navbar_AccountDiv_Email{
+  margin-right: 10px;
+}
+
+.Navbar_AccountDiv_Settings{
+  color:gray;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.Sidebar_MainDiv {
+  margin-top: 50px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: calc(100% - 50px);
+  width: 250px;
+  background-color: var(--primary-color-darker-sidebar);
+  overflow-y: auto;
+  transition: var(--sidebar-transition);
+  transform: translateX(-80%);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Quando la sidebar è aperta, la trasformiamo per farla scorrere in vista */
+.Sidebar_MainDiv.open {
+  transform: translateX(0);
+  transition: var(--sidebar-transition);
+}
+
+.Sidebar_Img {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.Sidebar_Img img {
+  width: 60%;
+}
+
+.Sidebar_BtnMain {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: rgb(219, 219, 219);
+  padding-top: 25px;
+  overflow: hidden;
+  transition: var(--sidebar-transition);
+}
+
+.Sidebar_BtnMain.non_open {
+  justify-content: flex-end;
+  align-items: flex-end;
+  transition: var(--sidebar-transition);
+}
+
+.Sidebar_Button {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 17px;
+  cursor: pointer;
+  width: 90%;
+  padding: 6px 0px 6px 6px;
+  margin-left: 10px;
+  border-radius: 5px;
+  transition: var(--sidebar-transition);
+}
+
+.Sidebar_Button.non_open {
+  width: 50px;
+  justify-content: center;
+  margin-left: 0px;
+  padding: 6px 0px 6px 0px;
+  border-radius: 0px;
+  transition: var(--sidebar-transition);
+}
+
+.Sidebar_Button:hover {
+  background-color: var(--primary-color-darker-sidebar-hover);
+  transition: var(--sidebar-transition);
+}
+
+.Sidebar_Button.active {
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.377);
+  transition: var(--sidebar-transition);
+}
+
+.Sidebar_Button_Icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+
+.Sidebar_LowerMain {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  color: rgb(255, 255, 255);
+  transition: var(--sidebar-transition);
+}
+
+.Sidebar_LowerMain.non_open {
+  justify-content: flex-end;
+  align-items: flex-end;
+  transition: var(--sidebar-transition);
+}
