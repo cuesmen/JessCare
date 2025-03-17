@@ -7,7 +7,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  z-index: 100;
+  z-index: 101;
 }
 
 .Navbar_MenuBtn {
@@ -22,6 +22,7 @@
   padding: 5px;
   cursor: pointer;
   transition: var(--sidebar-transition);
+  z-index: 101;
 }
 
 .Navbar_MenuBtn:hover {
@@ -34,10 +35,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 10px;
 }
 
 .Navbar_MenuImg img {
   width: 40px;
+  
 }
 
 .Navbar_MenuText {
@@ -116,11 +119,11 @@
 
 
 .Sidebar_MainDiv {
-  margin-top: 50px;
+  padding-top: 35px;
   position: fixed;
   top: 0;
   left: 0;
-  height: calc(100% - 50px);
+  height: 100%;
   width: 250px;
   background-color: var(--primary-color-darker-sidebar);
   overflow-y: auto;
