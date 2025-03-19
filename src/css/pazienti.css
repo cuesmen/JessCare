@@ -1,10 +1,31 @@
+.Pazienti_MainDiv{
+    min-height: 100vh;
+    height: 100%;
+    padding-bottom: 30px;
+}
+
+.Pazienti_MainDiv_Upperbar{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.pazienti_upper_bar{
+    width: 90%;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(0, 0, 0, 0.152);
+    padding: 5px;
+    border-radius: 10px;
+}
 
 .Pazienti_List_Div{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
     gap:10px;
-    padding-top: 30px;
 }
 
 .paziente_card{

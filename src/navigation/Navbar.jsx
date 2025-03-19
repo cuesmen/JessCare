@@ -60,7 +60,7 @@ export default function Navbar() {
         <div className="overlay" onClick={toggleSidebar}></div>
       )}
 
-      <Sidebar open={sidebarOpen} onClose={closeSidebar} />
+      <Sidebar menuOnClick={toggleSidebar} open={sidebarOpen} onClose={closeSidebar} />
     </>
   );
 }

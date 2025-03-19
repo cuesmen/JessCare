@@ -155,6 +155,28 @@ html, body {
 .MainDiv{
   width: 100%;
   height: calc(100vh - 50px);
+  padding-top: 50px;
   padding-left: 50px;
   background-color: rgb(240,240,240);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*/////////////////////MEDIA QUERY ////////////////////////////*/
+@media screen and (max-width: 600px) {
+  .MainDiv{
+    padding-left: 0px;
+  }
 }

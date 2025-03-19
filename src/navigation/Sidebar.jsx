@@ -68,6 +68,12 @@ export default function Sidebar({ open, onClose }) {
           onClick={handleLogout}
           Icon={<CgLogOut />}
         />
+        <SidebarButton
+          nonOpen={!open}
+          Title="Logout"
+          onClick={handleLogout}
+          Icon={<CgLogOut />}
+        />
       </div>
     </div>
   );
