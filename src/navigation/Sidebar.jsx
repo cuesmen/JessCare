@@ -7,13 +7,19 @@ import { CgLogOut } from "react-icons/cg";
 import { MdSpaceDashboard } from "react-icons/md";
 import { BsPersonRaisedHand } from "react-icons/bs";
 import { FaCalendarDay } from "react-icons/fa";
+import { IoSettings } from "react-icons/io5";
 
 import { useLoader } from '../main/LoaderContext';
+import { useAuth } from "../context/AuthContext"
 
 export default function Sidebar({ open, onClose }) {
   const navigate = useNavigate();
   const location = useLocation();
   const { showLoader, hideLoader } = useLoader();
+
+  const { session } = useAuth();
+  const email = session?.user?.email || "default@example.com";
+  const firstLetter = email.charAt(0).toUpperCase();
 
   // Funzione helper per verificare se il path corrisponde
   const isActive = (path) => location.pathname === path;
@@ -30,11 +36,25 @@ export default function Sidebar({ open, onClose }) {
     }
   };
 
+  const handleSettings = () => {
+
+  }
+
   return (
     <div className={`Sidebar_MainDiv ${open ? "open" : ""}`}>
-      <div className={`Sidebar_Img ${open ? "open" : ""}`}>
-        <img alt="logo" src="images/logo/grande/logo_full_white.png" />
+      <div className={`Sidebar_Img ${!open ? "non_open" : ""}`}>
+        <img alt="logo" src={open? "images/logo/grande/logo_full_white.png" : "images/logo/piccolo/logo_small_white.png"} />
       </div>
+      {email && <div className='Sidebar_AccountDiv'>
+        <div className={`Sidebar_AccountDiv_Inner ${!open ? "non_open" : ""}`}>
+          <div className={`Sidebar_AccountDiv_Circle ${!open ? "non_open" : ""}`}>
+            {firstLetter}
+          </div>
+          <div className='Sidebar_AccountDiv_Text'>
+            {email}
+          </div>
+        </div>
+      </div>}
       <div className={`Sidebar_BtnMain ${!open ? "non_open" : ""}`}>
         <SidebarButton
           nonOpen={!open}
@@ -64,9 +84,9 @@ export default function Sidebar({ open, onClose }) {
       <div className={`Sidebar_LowerMain ${!open ? "non_open" : ""}`}>
         <SidebarButton
           nonOpen={!open}
-          Title="Logout"
-          onClick={handleLogout}
-          Icon={<CgLogOut />}
+          Title="Settings"
+          onClick={handleSettings}
+          Icon={<IoSettings />}
         />
         <SidebarButton
           nonOpen={!open}

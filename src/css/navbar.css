@@ -42,7 +42,7 @@
 
 .Navbar_MenuImg img {
   width: 40px;
-  
+
 }
 
 .Navbar_MenuText {
@@ -63,7 +63,6 @@
   display: flex;
   align-items: center;
   padding-left: 5px;
-  border-left: 1px solid rgba(0, 0, 0, 0.308);
 }
 
 .Navbar_AccountDiv_Circle {
@@ -95,7 +94,7 @@
 
 
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 600px) {
   .Navbar_AccountDiv {
     display: none;
   }
@@ -142,15 +141,79 @@
   transition: var(--sidebar-transition);
 }
 
+
 .Sidebar_Img {
   display: flex;
   justify-content: center;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 35px;
+}
+
+.Sidebar_Img.non_open{
+  justify-content: flex-end;
+  transition: var(--sidebar-transition);
+}
+
+.Sidebar_Img.non_open img{
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+  transition: var(--sidebar-transition);
 }
 
 .Sidebar_Img img {
   width: 60%;
+}
+
+
+.Sidebar_AccountDiv {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.Sidebar_AccountDiv_Inner {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  gap:10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.267);
+}
+
+.Sidebar_AccountDiv_Inner.non_open{
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  flex-direction: row-reverse;
+  width: 100%;
+  margin-right: 10px;
+  transition: var(--sidebar-transition);
+}
+
+.Sidebar_AccountDiv_Circle {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.486);
+  color: rgb(255, 255, 255);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.Sidebar_AccountDiv_Circle.non_open{
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  transition: var(--sidebar-transition);
+}
+
+.Sidebar_AccountDiv_Text {
+  color: rgb(255, 255, 255);
+  font-weight: 650;
 }
 
 .Sidebar_BtnMain {
@@ -198,7 +261,8 @@
 
 .Sidebar_Button.active {
   color: white;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.377);
+  background-color: var(--primary-color);
+  box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.308);
   transition: var(--sidebar-transition);
 }
 
@@ -211,6 +275,7 @@
 
 .Sidebar_LowerMain {
   display: flex;
+  flex-direction: column;
   position: absolute;
   bottom: 0;
   width: 100%;

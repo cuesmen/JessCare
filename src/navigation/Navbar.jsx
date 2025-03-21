@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 import Sidebar from "./Sidebar";
 // Importiamo il context di autenticazione per accedere alla sessione utente
 import { useAuth } from "../context/AuthContext"
-import { IoSettings } from "react-icons/io5";
 
 export default function Navbar() {
   const location = useLocation();
@@ -47,9 +46,6 @@ export default function Navbar() {
         <div className="Navbar_MenuText">{displayText}</div>
 
         <div className="Navbar_AccountDiv_Wrapper">
-          <div className="Navbar_AccountDiv_Settings">
-            <IoSettings />
-          </div>
           <div className="Navbar_AccountDiv">
             <div className="Navbar_AccountDiv_Email">{email}</div>
             <div className="Navbar_AccountDiv_Circle">{firstLetter}</div>

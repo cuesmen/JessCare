@@ -1,6 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;  line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
@@ -17,7 +16,12 @@
   --primary-color-darker-sidebar: #39746a;
   --primary-color-darker-sidebar-hover: #2b524b;
 
-  --sidebar-transition: all 0.2s ease-in-out;
+  --sidebar-transition: all 0.4s ease-in-out;
+}
+
+::selection {
+  background: var(--primary-color-darker); 
+  color: white;                     
 }
 
 a {

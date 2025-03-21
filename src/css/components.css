@@ -1,9 +1,9 @@
-.input_icon{
+.input_icon {
     color: var(--primary-color-darker);
     font-size: 23px;
 }
 
-.input_main{
+.input_main {
     background-color: white;
     border: 1px solid rgba(0, 0, 0, 0.24);
     border-radius: 5px;
@@ -15,7 +15,7 @@
     gap: 10px;
 }
 
-.input_main input{
+.input_main input {
     background-color: white;
     border: none;
     width: 100%;
@@ -26,11 +26,65 @@
 .input_main input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 30px rgb(231, 231, 231) inset !important;
     -webkit-text-fill-color: rgb(19, 19, 19) !important;
-  }
-  
-  
-.input_main input:focus{
+}
+
+
+.input_main input:focus {
     border: none;
-    outline: none; 
+    outline: none;
     transition: all 0.3s ease;
-  }
+}
+
+.general_modal_upper {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 98;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.general_modal {
+    background-color: rgb(255, 255, 255);
+    width: 85%;
+    height: 90%;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.general_modal_upperbar{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.322);
+    font-weight: 650;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 5px;
+    height: 35px;
+}
+
+.general_modal_upperbar_icon{
+    font-size: 25px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.general_modal_upperbar_icon:hover{
+    transform: rotate(360deg);
+    background-color: var(--primary-color);
+    color:white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    transition: all 0.4s ease-in-out;
+}
+
+.general_modal_content{
+    overflow-y:scroll;
+    height: calc(100% - 35px);
+}
