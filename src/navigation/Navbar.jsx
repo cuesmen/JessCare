@@ -8,7 +8,8 @@ import { useAuth } from "../context/AuthContext"
 export default function Navbar() {
   const location = useLocation();
   const pathName = location.pathname;
-  const displayText = pathName === "/" ? "Home" : pathName.substring(1);
+  
+  const displayText = pathName === "/" ? "Home" : pathName.substring(1).replace(/-/g, " ");
 
   const { session } = useAuth();
   const email = session?.user?.email || "default@example.com";

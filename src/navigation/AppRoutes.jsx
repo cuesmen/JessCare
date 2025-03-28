@@ -6,11 +6,13 @@ import {
   Navigate,
 } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
-import Pazienti from "../pages/Pazienti/Pazienti";
 import Appuntamenti from "../pages/Appuntamenti";
 import Login from '../pages/Login';
 import { AuthProvider, useAuth } from '../context/AuthContext';
-import Navbar from '../navigation/Navbar';
+import Navbar from './Navbar';
+import PazientiWrapper from '../pages/Pazienti/PazientiWrapper';
+import PazientePage from '../pages/Pazienti/PazientePage/PazientePage'
+import PazienteAdd from '../pages/Pazienti/PazienteAdd/PazienteAdd';
 
 // Componente per proteggere le rotte (mostra un loader se ancora in caricamento)
 const ProtectedRoute = ({ children }) => {
@@ -44,7 +46,9 @@ const AppRoutes = () => {
                     <Routes>
                       <Route path="/" element={<Dashboard />} />
                       <Route path="/dashboard" element={<Dashboard />} />
-                      <Route path="/pazienti" element={<Pazienti />} />
+                      <Route path="/pazienti" element={<PazientiWrapper />} />
+                      <Route path="/paziente-add" element={<PazienteAdd />} />
+                      <Route path="/dettagli-paziente" element={<PazientePage />} />
                       <Route path="/appuntamenti" element={<Appuntamenti />} />
                       <Route path="*" element={<Navigate to="/dashboard" replace />} />
                     </Routes>

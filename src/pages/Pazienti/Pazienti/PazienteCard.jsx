@@ -1,18 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaExternalLinkAlt } from "react-icons/fa";
-
-function computeAge(dob) {
-  const birthDate = new Date(dob);
-  const today = new Date();
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const monthDiff = today.getMonth() - birthDate.getMonth();
-  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-    age--;
-  }
-  return age;
-}
-
+import { computeAge, computeSex } from '../PazienteAdd/utils';
 /**
  * Componente PazienteCard:
  * Visualizza una card compatta con le informazioni principali di un paziente,
@@ -25,6 +14,9 @@ const PazienteCard = ({ paziente, onClick }) => {
       className='paziente_card'
     >
       <div className='paziente_card_main'>
+        <div
+          className={`paziente_card_main_active ${paziente.exit? "red" : "green"}`}
+        ></div>
         {/* Cerchio decorativo per indicare, ad esempio, lo stato del paziente */}
         <div className='paziente_card_main_circle'>
           {paziente.nome.charAt(0).toUpperCase()}
@@ -45,7 +37,9 @@ const PazienteCard = ({ paziente, onClick }) => {
       <div className='paziente_card_age_phone'>
         {/* Visualizzazione dell'età e del numero di telefono */}
         <p><span>Età:</span> {computeAge(paziente.nascita)} anni</p>
-        {paziente.telefono && <p><span>Telefono:</span> {paziente.telefono}</p>}
+        <p><span>Telefono:</span> {paziente.telefono}</p>
+        <p><span>Sesso:</span> {computeSex(paziente.sex)}</p>
+        <p><span>Diagnosi in entrata: <br></br></span> {paziente.diagnosis_incoming}</p>
       </div>
     </div>
   );

@@ -16,6 +16,9 @@
   --primary-color-darker-sidebar: #39746a;
   --primary-color-darker-sidebar-hover: #2b524b;
 
+  --normal-black-color: rgb(40,40,40);
+  --normal-gray-color: rgb(100,100,100);
+
   --sidebar-transition: all 0.4s ease-in-out;
 }
 
@@ -39,22 +42,26 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: white;
+  border: 1px solid var(--primary-color-darker);
+  color:var(--primary-color-darker);
+  border-radius: 25px;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.2s ease;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: var(--primary-color-darker);
+  color: white;
+  transition: all 0.2s ease;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+button:active {
+  background-color: #ccc; /* Cambia il colore di sfondo */
+  transform: scale(0.9); /* Riduce leggermente la dimensione per dare un effetto "premuto" */
+  transition: all 0.2s ease;
 }
 
 @media (prefers-color-scheme: light) {
@@ -158,10 +165,11 @@ html, body {
 
 .MainDiv{
   width: 100%;
-  height: calc(100vh - 50px);
+  min-height: 100vh;
   padding-top: 50px;
+  padding-bottom: 50px;
   padding-left: 50px;
-  background-color: rgb(240,240,240);
+  background-color: rgb(250,250,250);
 }
 
 

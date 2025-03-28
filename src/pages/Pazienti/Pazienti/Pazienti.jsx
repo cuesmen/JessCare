@@ -1,39 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PazienteCard from './PazienteCard';
 import PazientiUpperBar from './PazientiUpperBar';
-import GeneralModal from '../../components/general_modal';
-import PazienteModal from './Modals/PazienteModal';
-import { supabase } from '../../supabaseClient';
-import { useLoader } from "../../main/LoaderContext";
+import { useNavigate } from 'react-router-dom';
 
-const Pazienti = () => {
-  const [pazienti, setPazienti] = useState([]);
-  const [selectedPaziente, setSelectedPaziente] = useState(null);
+const Pazienti = ({ pazienti, fetchPazienti }) => {
+
+  useEffect(() => {fetchPazienti()},[])
+
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
-  const { showLoader, hideLoader } = useLoader();
-
-  const fetchPazienti = async () => {
-    showLoader();
-
-    const { data, error } = await supabase
-      .from('Paziente')
-      .select('*');
-
-    if (error) {
-      console.error('Errore nel recupero dei pazienti:', error);
-    } else {
-      setPazienti(data);
-      console.log(data);
-    }
-
-    hideLoader();
-  };
-
-  useEffect(() => {
-    fetchPazienti();
-  }, []);
-
+  const queryParams = new URLSearchParams(location.search);
+  const statusQuery = queryParams.get("status");
 
   const filteredPazienti = pazienti.filter(paziente => {
     const nomeLower = paziente.name?.toLowerCase() || '';
@@ -54,24 +32,21 @@ const Pazienti = () => {
     }
   });
 
-  const onClickPazienteCard = (paz) => {
-    setSelectedPaziente(paz);
-    console.log(paz);
-  };
+  // Ordinamento: prima i pazienti con exit assente, ordinati per created_at decrescente,
+  // poi quelli con exit presente
+  const sortedPazienti = [...filteredPazienti].sort((a, b) => {
+    // Se a non ha exit e b sì, a viene prima
+    if (!a.exit && b.exit) return -1;
+    // Se a ha exit e b no, b viene prima
+    if (a.exit && !b.exit) return 1;
+    // Se entrambi hanno exit (o nessuno), ordina per created_at decrescente
+    return new Date(b.created_at) - new Date(a.created_at);
+  });
 
   return (
     <>
-      {selectedPaziente && (
-        <GeneralModal
-          opened={selectedPaziente != null}
-          title="Dettagli Paziente"
-          onClose={() => setSelectedPaziente(null)}
-        >
-          <PazienteModal paziente={selectedPaziente} />
-        </GeneralModal>
-      )}
 
-      <div className='Pazienti_MainDiv MainDiv'>
+      <div className=''>
         <div className='Pazienti_MainDiv_Upperbar'>
           <PazientiUpperBar
             searchTerm={searchTerm}
@@ -79,7 +54,7 @@ const Pazienti = () => {
             onSuccessAddUser={fetchPazienti} />
         </div>
         <div className='Pazienti_List_Div'>
-          {filteredPazienti.map(paziente => (
+          {sortedPazienti.map(paziente => (
             <PazienteCard
               key={paziente.id}
               paziente={{
@@ -87,9 +62,11 @@ const Pazienti = () => {
                 nome: paziente.name,
                 cognome: paziente.surname,
                 nascita: paziente.birth,
-                telefono: paziente.cellphone
+                telefono: paziente.cellphone,
+                sex: paziente.sex,
+                diagnosis_incoming: paziente.diagnosis_incoming
               }}
-              onClick={(paz) => onClickPazienteCard(paz)}
+              onClick={() =>  navigate(`/dettagli-paziente?&status=${statusQuery}&id=${paziente.id}`)}
             />
           ))}
         </div>

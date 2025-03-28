@@ -86,5 +86,70 @@
 
 .general_modal_content{
     overflow-y:scroll;
+    scrollbar-width: none;
     height: calc(100% - 35px);
+}
+
+.General_Navigation_MainDiv{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.General_Navigation_List_Content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap:10px;
+    font-size: 14px;
+    padding-left: 15px;
+    padding-top: 5px;
+}
+
+.General_Navigation_Content{
+    color:rgb(88, 88, 88);
+    transition: all 0.2s ease;
+}
+
+.General_Navigation_Content:hover{
+    color:var(--primary-color-darker);
+    transition: all 0.2s ease;
+}
+
+.General_Navigation_Content.active{
+    color:rgb(24, 24, 24);
+    font-weight: 550;
+    color:var(--primary-color-darker);
+}
+
+.General_Navigation_Divider{
+    font-size: 12px;
+    cursor:default;
+}
+
+.General_Navigation_List_Icon{
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.General_Navigation_Icon{
+    color:black;
+    background-color: rgb(214, 214, 214);
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.General_Navigation_Icon:hover{
+    background-color: var(--primary-color-darker);
+    color:white;
+    transition: all 0.2s ease;
 }
