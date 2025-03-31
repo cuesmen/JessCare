@@ -50,27 +50,31 @@ export default function PazientePage() {
     const computerLabel = () => {
         let toRet;
         if (statusQuery === "in-corso")
-            toRet = { label: "Pazienti", path: "/pazienti?&status=in-corso", active: false };
+            toRet = [
+                { label: "Pazienti", path: "/pazienti?&status=none", active: false },
+                { label: "In Corso", path: "/pazienti?&status=in-corso", active: false },
+                { label: `${computeFirstBySex(paziente.sex)} ${paziente.surname}`, path: `/dettagli-paziente?&status=in-corso&id=${id}`, active: true }
+            ];
         else if (statusQuery === "concluso")
-            toRet = { label: "Pazienti", path: "/pazienti?&status=concluso", active: false };
+            toRet = [
+                { label: "Pazienti", path: "/pazienti?&status=none", active: false },
+                { label: "Conclusi", path: "/pazienti?&status=concluso", active: false },
+                { label: `${computeFirstBySex(paziente.sex)} ${paziente.surname}`, path: `/dettagli-paziente?&status=concluso&id=${id}`, active: true }
+            ];
         else
-            toRet = { label: "Pazienti", path: "/pazienti?", active: false };
+            toRet = [{ label: "Pazienti", path: "/pazienti?", active: false }];
         return toRet;
     }
-
-    const breadcrumbs = paziente ? [
-        computerLabel(),
-        { label: "Dettagli Paziente", path: `/dettagli-paziente?&id=${id}`, active: false },
-        { label: `${computeFirstBySex(paziente.sex)} ${paziente.surname}`, path: `/dettagli-paziente?&id=${id}`, active: true },
-    ] : [];
     
-  const handleOnClickGoBack = () => {
-    navigate(`/pazienti?&status=${statusQuery}`)
-  }
+    const breadcrumbs = paziente ? [...computerLabel()] : [];
 
-  const handleOnAddUser = () => {
-    navigate(`/paziente-add`)
-  }
+    const handleOnClickGoBack = () => {
+        navigate(`/pazienti?&status=${statusQuery}`)
+    }
+
+    const handleOnAddUser = () => {
+        navigate(`/paziente-add`)
+    }
 
 
     return (
@@ -109,17 +113,10 @@ export default function PazientePage() {
                                     <PazienteInfoCard title="Diagnosi in ingresso" desc={paziente.diagnosis_incoming} />
                                     <PazienteInfoCard title="Creato il" desc={paziente.created_at} />
                                 </div>
-                                {/*<p><strong>Data di nascita:</strong> {paziente.nascita}</p>
-                            <p><strong>Telefono:</strong> {paziente.telefono}</p>
-                            <p><strong>Email:</strong> {paziente.email}</p>
-                            <p><strong>Data entrata:</strong> {paziente.entry}</p>
-                            <p><strong>Data uscita:</strong> {paziente.exit || '—'}</p>
-                            <p><strong>Diagnosi in ingresso:</strong> {paziente.diagnosis_incoming || '—'}</p>
-                            <p><strong>Creato il:</strong> {paziente.created_at}</p>*/}
                             </div>
                         </div>
+                        <PazienteAppuntamenti />
                     </div>
-                    <PazienteAppuntamenti />
                 </>
             )}
         </>
