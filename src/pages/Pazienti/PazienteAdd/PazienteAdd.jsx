@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../../../supabaseClient";
 import IconInput from "../../../components/IconInput";
 import IconSelect from "../../../components/IconSelect";
@@ -17,9 +17,16 @@ import GeneralNavigation from "../../../components/GeneralNavigation/general_nav
 import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../../components/alert"
+import { computeFirstBySex } from './utils';
+
 
 // Componente per l'aggiunta di un nuovo paziente
-export default function PazienteAdd() {
+export default function PazienteAdd({ modify }) {
+
+    const queryParams = new URLSearchParams(location.search);
+    const pazienteId = queryParams.get("id");
+    const statusQuery = queryParams.get("status");
+
     const [form, setForm] = useState({
         name: "",
         surname: "",
@@ -117,24 +124,43 @@ export default function PazienteAdd() {
 
         const fullNumber = "+39" + form.cellphone;
 
-        const { error } = await supabase.from("Paziente").insert([{
-            ...form,
-            cellphone: fullNumber
-        }]);
+        if (modify) {
+            const { error } = await supabase
+                .from("Paziente")
+                .update({
+                    ...form,
+                    cellphone: fullNumber
+                })
+                .eq("id", pazienteId);
 
-        if (error) {
-            console.error(error);
-            showAlert("error", "Errore di inserimento", `Non è stato possibile salvare il paziente. Errore: \n ${error.message}`);
+            if (error) {
+                console.error(error);
+                showAlert("error", "Errore di aggiornamento", `Non è stato possibile aggiornare il paziente. Errore: \n ${error.message}`);
+            } else {
+                showAlert("success", "Paziente aggiornato", "Il paziente è stato aggiornato correttamente.");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            }
+
         } else {
-            showAlert("success", "Paziente aggiunto", "Il paziente è stato inserito correttamente.");
-            clearForm();
+            const { error } = await supabase
+                .from("Paziente")
+                .insert([{
+                    ...form,
+                    cellphone: fullNumber
+                }]);
+
+            if (error) {
+                console.error(error);
+                showAlert("error", "Errore di inserimento", `Non è stato possibile salvare il paziente. Errore: \n ${error.message}`);
+            } else {
+                showAlert("success", "Paziente aggiunto", "Il paziente è stato inserito correttamente.");
+                clearForm();
+            }
         }
     };
 
-    const breadcrumbs = [
-        { label: "Pazienti", path: "/pazienti?&status=none", active: false, onClick: 'reloadPAZ' },
-        { label: "Aggiungi Paziente", path: "/paziente-add", active: true, onClick: 'reloadPAZ' },
-    ];
 
     const handleOnClickGoBack = () => {
         navigate("/pazienti");
@@ -148,6 +174,64 @@ export default function PazienteAdd() {
         const part3 = cleaned.slice(6, 10);
         return [part1, part2, part3].filter(Boolean).join(" ");
     }
+
+
+
+
+
+
+
+    const fetchPazienteById = async () => {
+        const { data, error } = await supabase
+            .from("Paziente")
+            .select("*")
+            .eq("id", pazienteId);
+
+        if (error) {
+            console.error("Errore nel recupero del paziente:", error);
+            showAlert("error", "Errore", "Errore nel recupero dei dati del paziente.");
+        } else {
+            if (data && data.length > 0) {
+                const paziente = data[0];
+
+                // Rimuove il prefisso +39 dal numero per l'input
+                paziente.cellphone = paziente.cellphone?.replace("+39", "");
+
+                setForm({
+                    name: paziente.name || "",
+                    surname: paziente.surname || "",
+                    birth: paziente.birth || "",
+                    cellphone: paziente.cellphone || "",
+                    email: paziente.email || "",
+                    entry: paziente.entry || "",
+                    sex: paziente.sex || "",
+                    diagnosis_incoming: paziente.diagnosis_incoming || ""
+                });
+            } else {
+                showAlert("error", "Non trovato", "Nessun paziente trovato con questo ID.");
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (modify) {
+            fetchPazienteById();
+        }
+    }, []);
+
+    const breadcrumbs = modify
+    ? [
+        { label: "Pazienti", path: "/pazienti?&status=none", active: false, onClick: 'reloadPAZ' },
+        { label: statusQuery === "in-corso" ? "In corso" : "Conclusi", path: `/pazienti?&status=${statusQuery}`, active: false },
+        { label: "Dettagli Paziente", path: `/dettagli-paziente?&status=${statusQuery}&id=${pazienteId}`, active: false},
+        { label: "Modifica Paziente", path: `/paziente-modifica?&status=${statusQuery}&id=${pazienteId}`, active: false },
+        { label: `${computeFirstBySex(form.sex)} ${form.surname}`, path: `/paziente-modifica?&status=${statusQuery}&id=${pazienteId}`, active: true }
+    ]
+    : [
+        { label: "Pazienti", path: "/pazienti?&status=none", active: false, onClick: 'reloadPAZ' },
+        { label: "Aggiungi Paziente", path: "/paziente-add", active: true, onClick: 'reloadPAZ' }
+    ];
+
 
 
     return (

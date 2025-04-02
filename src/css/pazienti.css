@@ -47,7 +47,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 .paziente_card {
@@ -206,8 +206,8 @@
     overflow-x: auto;
     scrollbar-width: 100%;
     gap: 10px;
-  }
-  
+}
+
 .paziente_info_card {
     padding: 10px;
     padding-right: 200px;
@@ -228,13 +228,13 @@
     white-space: nowrap;
 }
 
-.pazienti_intro_list{
+.pazienti_intro_list {
     display: flex;
     gap: 20px;
     padding-left: 20px;
 }
 
-.pazienti_intro_div{
+.pazienti_intro_div {
     border-radius: 15px;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.212);
     width: 150px;
@@ -251,12 +251,12 @@
     transition: all 0.2s ease-in-out;
 }
 
-.pazienti_intro_div:hover{
-    background-color: rgb(247,247,247);
+.pazienti_intro_div:hover {
+    background-color: rgb(247, 247, 247);
     transition: all 0.2s ease-in-out;
 }
 
-.pazienti_intro_div a{
+.pazienti_intro_div a {
     font-size: 30px;
     width: 100%;
     display: flex;
@@ -266,29 +266,29 @@
     transition: all 0.2s ease;
 }
 
-.pazienti_intro_div:hover a{
+.pazienti_intro_div:hover a {
     color: var(--primary-color-darker);
     transition: all 0.2s ease;
 }
 
-.paziente_add_main{
+.paziente_add_main {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-.paziente_add_main_form{
+.paziente_add_main_form {
     display: flex;
     gap: 20px;
     flex-direction: column;
 }
 
-.paziente_add_main_form_lower{
+.paziente_add_main_form_lower {
     width: 100%;
     display: flex;
     gap: 20px;
 }
 
-.paziente_add_form_group{
+.paziente_add_form_group {
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -298,10 +298,58 @@
     width: 100%;
 }
 
-.paziente_imp_actions_main_div{
-    padding-left: 15px;
+.paziente_imp_actions_main_div button{
+    width: 180px;
+}
+
+.paziente_imp_actions_main_div {
     display: flex;
-    gap: 15px;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.paziente_imp_actions_main_div_upper{
+    margin-top: 50px;
+    padding-left: 15px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.226);
+}
+
+.paziente_imp_actions_main_div_upper h1{
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--normal-color-color);
+    padding-bottom: 5px;
+}
+
+
+
+
+.paziente_modal_main_left_icon{
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+/*APPUNTAMENTI*/
+.pazienti_appuntamenti_div{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    padding-top: 50px;
+}
+
+.pazienti_appuntamenti_div_inner{
+    width: 90%;
+    height: 100%;
 }
 
 
@@ -317,14 +365,61 @@
 
 
 
+@media screen and (max-width: 730px) {
 
 
-
-
-
-@media screen and (max-width: 600px) {
-    .paziente_modal_main_div {
-        flex-direction: column;
+    .paziente_modal_main_left{
+        position: relative;
     }
-    
+
+    .paziente_modal_main_left_icon{
+        position: absolute;
+        display: block;
+        top:0;
+        right:0;
+        font-size: 13px;
+    }
+
+
+    .paziente_modal_main {
+        padding: 10px;
+        width: 100%;
+        padding-right: 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-right: 0px;
+    }
+
+    .PazientePage_MainDiv {
+        padding-top: 10px;
+    }
+
+    .paziente_modal_main_div {
+        margin-right: 0px;
+        position: relative;
+        padding-top: 0px;
+        min-width: 300px;
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.212);
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .paziente_modal_main_gen{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .paziente_modal_main_gen button {
+        margin-top: 20px;
+    }
+
+
 }

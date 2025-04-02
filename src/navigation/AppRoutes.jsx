@@ -48,6 +48,7 @@ const AppRoutes = () => {
                       <Route path="/dashboard" element={<Dashboard />} />
                       <Route path="/pazienti" element={<PazientiWrapper />} />
                       <Route path="/paziente-add" element={<PazienteAdd />} />
+                      <Route path="/paziente-modifica" element={<PazienteAdd modify={true}/>} />
                       <Route path="/dettagli-paziente" element={<PazientePage />} />
                       <Route path="/appuntamenti" element={<Appuntamenti />} />
                       <Route path="*" element={<Navigate to="/dashboard" replace />} />

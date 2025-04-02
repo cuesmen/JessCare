@@ -10,6 +10,7 @@ import { FaUserPlus } from "react-icons/fa";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import PazienteImpActions from './PazienteImpActions';
+import { FaArrowRightLong } from "react-icons/fa6";
 
 export default function PazientePage() {
     const { showLoader, hideLoader } = useLoader();
@@ -100,10 +101,11 @@ export default function PazientePage() {
                                     <div className='paziente_modal_main_gen'>
                                         <div className='paziente_modal_main_name'>{computeFirstBySex(paziente.sex)} {paziente.name} {paziente.surname}</div>
                                         <div className='paziente_modal_main_email'>{paziente.email}</div>
-                                        <button>Modifica profilo</button>
+                                        <button onClick={() => navigate(`/paziente-modifica?&id=${paziente.id}&status=${statusQuery}`)}>Modifica profilo</button>
                                     </div>
                                 </div >
                                 <div className='paziente_modal_main_left'>
+                                    <div className='paziente_modal_main_left_icon'><FaArrowRightLong/></div>
                                     <PazienteInfoCard title="Sesso" desc={computeSex(paziente.sex)} />
                                     <PazienteInfoCard title="Status" desc={paziente.exit ? "Concluso" : "In Corso"} />
                                     <PazienteInfoCard title="Età" desc={computeAge(paziente.birth)} />
@@ -117,7 +119,7 @@ export default function PazientePage() {
                             </div>
                         </div>
                         <PazienteAppuntamenti />
-                        <PazienteImpActions paziente={paziente}/>
+                        <PazienteImpActions paziente={paziente} status={statusQuery}/>
                     </div>
                 </>
             )}

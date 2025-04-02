@@ -104,8 +104,8 @@ export default function PazienteAppuntamenti() {
   };
 
   return (
-    <div className="flex centerx" style={{ padding: '50px 0' }}>
-      <div style={{ height: '500px', width: '80%' }}>
+    <div className="pazienti_appuntamenti_div" >
+      <div className='pazienti_appuntamenti_div_inner'>
         <Calendar
           localizer={localizer}
           culture="it"
