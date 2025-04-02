@@ -105,7 +105,7 @@ export default function AppuntamentiCalendar() {
 
   return (
     <div className="pazienti_appuntamenti_div_calendar" >
-      <div className='pazienti_appuntamenti_div_inner'>
+      <div className='pazienti_appuntamenti_div_inner_calendar'>
         <Calendar
           localizer={localizer}
           culture="it"

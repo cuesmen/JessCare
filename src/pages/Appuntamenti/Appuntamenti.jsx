@@ -3,7 +3,7 @@ import AppuntamentiCalendar from './AppuntamentiCalendar';
 
 const Appuntamenti = () => {
   return (
-    <div className='MainDiv'>
+    <div className='MainDiv AppuntamentiMain'>
       <AppuntamentiCalendar />
     </div>
   );
