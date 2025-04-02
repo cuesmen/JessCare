@@ -13,6 +13,7 @@ import Navbar from './Navbar';
 import PazientiWrapper from '../pages/Pazienti/PazientiWrapper';
 import PazientePage from '../pages/Pazienti/PazientePage/PazientePage'
 import PazienteAdd from '../pages/Pazienti/PazienteAdd/PazienteAdd';
+import AppuntamentiAdd from '../pages/Appuntamenti/AppuntamentiAdd/AppuntamentiAdd';
 
 // Componente per proteggere le rotte (mostra un loader se ancora in caricamento)
 const ProtectedRoute = ({ children }) => {
@@ -51,6 +52,7 @@ const AppRoutes = () => {
                       <Route path="/paziente-modifica" element={<PazienteAdd modify={true}/>} />
                       <Route path="/dettagli-paziente" element={<PazientePage />} />
                       <Route path="/appuntamenti" element={<Appuntamenti />} />
+                      <Route path="/appuntamento-aggiungi" element={<AppuntamentiAdd />} />
                       <Route path="*" element={<Navigate to="/dashboard" replace />} />
                     </Routes>
               </ProtectedRoute>

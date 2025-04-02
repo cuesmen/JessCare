@@ -1,32 +1,20 @@
-// AppuntamentiCalendar.jsx
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
-import moment from 'moment';
-import 'moment/locale/it';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import AppuntamentoView from './AppuntamentoView';
-import GeneralModal from "../../components/general_modal"
+import GeneralModal from "../../components/general_modal";
+import { supabase } from '../../supabaseClient';
+import { useLoader } from "../../main/LoaderContext"; // 👉 importa il loader
+import moment from 'moment';
+import 'moment/dist/locale/it';
 
-// Inizializza moment con la lingua italiana
 moment.locale('it');
+moment.updateLocale('it', {
+  week: { dow: 1 }
+});
+
 const localizer = momentLocalizer(moment);
 
-// Eventi statici di esempio
-const events = [
-  {
-    title: 'Sessione con Mario Rossi',
-    start: new Date(2025, 2, 31, 10, 0, 0),
-    end: new Date(2025, 2, 31, 11, 0, 0),
-  },
-  {
-    title: 'Sessione con Giulia Bianchi',
-    start: new Date(2025, 2, 31, 12, 0, 0),
-    end: new Date(2025, 2, 31, 13, 0, 0),
-  },
-];
-
-// Traduzioni in italiano per l'interfaccia del calendario
 const messages = {
   date: 'Data',
   time: 'Ora',
@@ -46,10 +34,29 @@ const messages = {
   showMore: total => `+ altri ${total}`,
 };
 
-/**
- * CustomToolbar: Toolbar personalizzata con pulsanti di navigazione e cambio vista
- */
-const CustomToolbar = ({ label, onNavigate, onView, views, view }) => {
+const CustomToolbar = ({ label, date, onNavigate, onView, views, view }) => {
+
+  const formatLabel = () => {
+    const mDate = moment(date).locale('it');
+
+    switch (view) {
+      case 'month':
+        return mDate.format('MMMM YYYY'); // "Aprile 2025"
+      case 'week': {
+        const startOfWeek = mDate.clone().startOf('week');
+        const endOfWeek = mDate.clone().endOf('week');
+        return `${startOfWeek.format('D MMMM')} – ${endOfWeek.format('D MMMM')}`;
+      }
+      case 'day':
+        return mDate.format('dddd D MMMM YYYY'); // <-- qui il fix
+      case 'agenda':
+        return 'Agenda';
+      default:
+        return '';
+    }
+  };
+
+
   const goToBack = () => onNavigate('PREV');
   const goToNext = () => onNavigate('NEXT');
   const goToToday = () => onNavigate('TODAY');
@@ -61,7 +68,9 @@ const CustomToolbar = ({ label, onNavigate, onView, views, view }) => {
         <button onClick={goToToday}>Oggi</button>
         <button onClick={goToNext}>Avanti</button>
       </span>
-      <span className="rbc-toolbar-label">{label}</span>
+      <span className="rbc-toolbar-label">
+        {formatLabel()}
+      </span>
       <span className="rbc-btn-group">
         {views.map(v => (
           <button
@@ -80,31 +89,60 @@ const CustomToolbar = ({ label, onNavigate, onView, views, view }) => {
   );
 };
 
-/**
- * AppuntamentiCalendar: Componente principale che mostra il calendario
- */
 export default function AppuntamentiCalendar() {
-  const [date, setDate] = useState(new Date(2025, 2, 31));
+  const [date, setDate] = useState(new Date());
   const [currentView, setCurrentView] = useState('month');
   const [eventoSelezionato, setEventoSelezionato] = useState(null);
+  const [events, setEvents] = useState([]);
+  const { showLoader, hideLoader } = useLoader(); // 👉 usa il loader
 
-  // Gestisce la navigazione tra le date
-  const handleNavigate = (newDate) => {
-    setDate(newDate);
+  useEffect(() => {
+    fetchAppuntamenti();
+  }, []);
+
+  const fetchAppuntamenti = async () => {
+    showLoader(); // 👉 mostra loader
+
+    try {
+      const { data, error } = await supabase
+        .from('Appuntamenti')
+        .select('*');
+
+      if (error) {
+        console.error("Errore nel recupero degli appuntamenti:", error.message);
+        return;
+      }
+
+      const eventiFormattati = data.map(app => {
+        const [y, m, d] = app.date.split('-');
+        const [startH, startM] = app.hour_start.split(':');
+        const [endH, endM] = app.hour_end.split(':');
+
+        const start = new Date(y, m - 1, d, startH, startM);
+        const end = new Date(y, m - 1, d, endH, endM);
+
+        return {
+          id: app.id,
+          title: app.title || "Sessione",
+          start,
+          end,
+          notes: app.notes,
+          id_paziente: app.id_paziente
+        };
+      });
+
+      setEvents(eventiFormattati);
+    } finally {
+      hideLoader(); // 👉 nascondi loader sempre
+    }
   };
 
-  // Gestisce il cambio di vista (mese, settimana, giorno, agenda)
-  const handleViewChange = (view) => {
-    setCurrentView(view);
-  };
-
-  // Apre la modale con i dettagli dell'appuntamento
-  const handleDoubleClickEvent = (event) => {
-    setEventoSelezionato(event);
-  };
+  const handleNavigate = (newDate) => setDate(newDate);
+  const handleViewChange = (view) => setCurrentView(view);
+  const handleDoubleClickEvent = (event) => setEventoSelezionato(event);
 
   return (
-    <div className="pazienti_appuntamenti_div_calendar" >
+    <div className="pazienti_appuntamenti_div_calendar">
       <div className='pazienti_appuntamenti_div_inner_calendar'>
         <Calendar
           localizer={localizer}
@@ -119,17 +157,37 @@ export default function AppuntamentiCalendar() {
           onDoubleClickEvent={handleDoubleClickEvent}
           views={['month', 'week', 'day', 'agenda']}
           messages={messages}
-          components={{ toolbar: CustomToolbar }}
+          components={{
+            toolbar: (props) => <CustomToolbar {...props} date={props.date} />
+          }}
+          formats={{
+            dayFormat: (date, culture, localizer) => moment(date).format('ddd DD/MM'),
+            weekdayFormat: (date, culture, localizer) => moment(date).format('dddd'),
+            monthHeaderFormat: (date, culture, localizer) => moment(date).format('MMMM YYYY'),
+            dayHeaderFormat: (date, culture, localizer) => moment(date).format('dddd DD MMMM'),
+            dayRangeHeaderFormat: ({ start, end }, culture, localizer) =>
+              `${moment(start).format('DD MMM')} – ${moment(end).format('DD MMM')}`,
+            agendaHeaderFormat: ({ start, end }, culture, localizer) =>
+              `${moment(start).format('DD MMM')} – ${moment(end).format('DD MMM')}`,
+            agendaDateFormat: (date, culture, localizer) => moment(date).format('dddd DD MMMM'),
+            agendaTimeFormat: (date, culture, localizer) => moment(date).format('HH:mm'),
+            agendaTimeRangeFormat: ({ start, end }, culture, localizer) =>
+              `${moment(start).format('HH:mm')} – ${moment(end).format('HH:mm')}`,
+          }}
         />
       </div>
-      {eventoSelezionato && <GeneralModal
-      title="Dettagli Appuntamento"
-        children={<AppuntamentoView
-          evento={eventoSelezionato}
+      {eventoSelezionato && (
+        <GeneralModal
+          title="Dettagli Appuntamento"
+          children={
+            <AppuntamentoView
+              evento={eventoSelezionato}
+              onClose={() => setEventoSelezionato(null)}
+            />
+          }
           onClose={() => setEventoSelezionato(null)}
-        />}
-        onClose={() => setEventoSelezionato(null)}
-      />}
+        />
+      )}
     </div>
   );
 }

@@ -18,10 +18,13 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../../components/alert"
 import { computeFirstBySex } from './utils';
+import { useLoader } from "../../../main/LoaderContext";
 
 
 // Componente per l'aggiunta di un nuovo paziente
 export default function PazienteAdd({ modify }) {
+
+    const { showLoader, hideLoader } = useLoader();
 
     const queryParams = new URLSearchParams(location.search);
     const pazienteId = queryParams.get("id");
@@ -215,22 +218,24 @@ export default function PazienteAdd({ modify }) {
 
     useEffect(() => {
         if (modify) {
+            showLoader()
             fetchPazienteById();
+            hideLoader();
         }
     }, []);
 
     const breadcrumbs = modify
-    ? [
-        { label: "Pazienti", path: "/pazienti?&status=none", active: false, onClick: 'reloadPAZ' },
-        { label: statusQuery === "in-corso" ? "In corso" : "Conclusi", path: `/pazienti?&status=${statusQuery}`, active: false },
-        { label: "Dettagli Paziente", path: `/dettagli-paziente?&status=${statusQuery}&id=${pazienteId}`, active: false},
-        { label: "Modifica Paziente", path: `/paziente-modifica?&status=${statusQuery}&id=${pazienteId}`, active: false },
-        { label: `${computeFirstBySex(form.sex)} ${form.surname}`, path: `/paziente-modifica?&status=${statusQuery}&id=${pazienteId}`, active: true }
-    ]
-    : [
-        { label: "Pazienti", path: "/pazienti?&status=none", active: false, onClick: 'reloadPAZ' },
-        { label: "Aggiungi Paziente", path: "/paziente-add", active: true, onClick: 'reloadPAZ' }
-    ];
+        ? [
+            { label: "Pazienti", path: "/pazienti?&status=none", active: false, onClick: 'reloadPAZ' },
+            { label: statusQuery === "in-corso" ? "In corso" : "Conclusi", path: `/pazienti?&status=${statusQuery}`, active: false },
+            { label: "Dettagli Paziente", path: `/dettagli-paziente?&status=${statusQuery}&id=${pazienteId}`, active: false },
+            { label: "Modifica Paziente", path: `/paziente-modifica?&status=${statusQuery}&id=${pazienteId}`, active: false },
+            { label: `${computeFirstBySex(form.sex)} ${form.surname}`, path: `/paziente-modifica?&status=${statusQuery}&id=${pazienteId}`, active: true }
+        ]
+        : [
+            { label: "Pazienti", path: "/pazienti?&status=none", active: false, onClick: 'reloadPAZ' },
+            { label: "Aggiungi Paziente", path: "/paziente-add", active: true, onClick: 'reloadPAZ' }
+        ];
 
 
 
