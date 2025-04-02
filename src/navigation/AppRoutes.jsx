@@ -6,7 +6,7 @@ import {
   Navigate,
 } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
-import Appuntamenti from "../pages/Appuntamenti";
+import Appuntamenti from "../pages/Appuntamenti/Appuntamenti";
 import Login from '../pages/Login';
 import { AuthProvider, useAuth } from '../context/AuthContext';
 import Navbar from './Navbar';

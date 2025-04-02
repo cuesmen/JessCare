@@ -347,6 +347,16 @@
     padding-top: 50px;
 }
 
+.pazienti_appuntamenti_div_calendar{
+    width: 100%;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
 .pazienti_appuntamenti_div_inner{
     width: 90%;
     height: 100%;
