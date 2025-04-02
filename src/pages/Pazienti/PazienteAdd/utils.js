@@ -31,3 +31,15 @@ export function computeSex(sex) {
     }
   }
   
+
+  export function formatDateTime(isoString) {
+    if (!isoString) return "";
+    const date = new Date(isoString);
+    const formattedDate = date.toLocaleDateString("it-IT"); // es: 02/04/2025
+    const formattedTime = date.toLocaleTimeString("it-IT", {
+      hour: "2-digit",
+      minute: "2-digit",
+    }); // es: 14:52
+    return `${formattedDate} alle ${formattedTime}`;
+  }
+  

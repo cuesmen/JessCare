@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { computeAge, computeSex, computeFirstBySex } from '../PazienteAdd/utils';
+import { computeAge, computeSex, computeFirstBySex, formatDateTime } from '../PazienteAdd/utils';
 import { supabase } from '../../../supabaseClient';
 import { useLoader } from "../../../main/LoaderContext";
 import { useState, useEffect } from 'react';
@@ -9,6 +9,7 @@ import PazienteAppuntamenti from './PazienteAppuntamenti';
 import { FaUserPlus } from "react-icons/fa";
 import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import PazienteImpActions from './PazienteImpActions';
 
 export default function PazientePage() {
     const { showLoader, hideLoader } = useLoader();
@@ -111,11 +112,12 @@ export default function PazientePage() {
                                     <PazienteInfoCard title="Data di entrata" desc={paziente.entry} />
                                     <PazienteInfoCard title="Data di uscita" desc={paziente.exit} />
                                     <PazienteInfoCard title="Diagnosi in ingresso" desc={paziente.diagnosis_incoming} />
-                                    <PazienteInfoCard title="Creato il" desc={paziente.created_at} />
+                                    <PazienteInfoCard title="Creato il" desc={formatDateTime(paziente.created_at)} />
                                 </div>
                             </div>
                         </div>
                         <PazienteAppuntamenti />
+                        <PazienteImpActions paziente={paziente}/>
                     </div>
                 </>
             )}

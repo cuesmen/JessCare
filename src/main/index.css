@@ -16,6 +16,8 @@
   --primary-color-darker-sidebar: #39746a;
   --primary-color-darker-sidebar-hover: #2b524b;
 
+  --primary-color-darker-red: rgb(189, 29, 29);
+
   --normal-black-color: rgb(40,40,40);
   --normal-gray-color: rgb(100,100,100);
 
@@ -63,6 +65,7 @@ button:active {
   transform: scale(0.9); /* Riduce leggermente la dimensione per dare un effetto "premuto" */
   transition: all 0.2s ease;
 }
+
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -173,17 +176,34 @@ html, body {
 }
 
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
 
 
 
-
-
-
-
-
-
-
-
+.button_important {
+  padding: 0.5em 0.8em;
+  font-size: 0.9em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--primary-color-darker-red);
+  border: 1px solid var(--primary-color-darker-red);
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.button_important:hover {
+  background-color: var(--primary-color-darker-red);
+  color: white;
+  transition: all 0.2s ease;
+}
+.button_important:active {
+  background-color: #ccc; /* Cambia il colore di sfondo */
+  transform: scale(0.9); /* Riduce leggermente la dimensione per dare un effetto "premuto" */
+  transition: all 0.2s ease;
+}
 
 
 /*/////////////////////MEDIA QUERY ////////////////////////////*/

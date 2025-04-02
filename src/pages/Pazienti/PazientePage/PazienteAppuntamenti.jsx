@@ -1,14 +1,18 @@
+// PazienteAppuntamenti.jsx
+
 import React, { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import 'moment/locale/it'; // Importa la localizzazione in italiano
+import 'moment/locale/it';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import PazienteViewAppuntamento from './PazienteViewAppuntamento';
+import GeneralModal from "../../../components/general_modal"
 
-// Imposta moment per usare il locale italiano
+// Inizializza moment con la lingua italiana
 moment.locale('it');
-
 const localizer = momentLocalizer(moment);
 
+// Eventi statici di esempio
 const events = [
   {
     title: 'Sessione con Mario Rossi',
@@ -22,6 +26,7 @@ const events = [
   },
 ];
 
+// Traduzioni in italiano per l'interfaccia del calendario
 const messages = {
   date: 'Data',
   time: 'Ora',
@@ -41,18 +46,13 @@ const messages = {
   showMore: total => `+ altri ${total}`,
 };
 
-const CustomToolbar = ({ label, onNavigate }) => {
-  const goToBack = () => {
-    onNavigate('PREV');
-  };
-
-  const goToNext = () => {
-    onNavigate('NEXT');
-  };
-
-  const goToToday = () => {
-    onNavigate('TODAY');
-  };
+/**
+ * CustomToolbar: Toolbar personalizzata con pulsanti di navigazione e cambio vista
+ */
+const CustomToolbar = ({ label, onNavigate, onView, views, view }) => {
+  const goToBack = () => onNavigate('PREV');
+  const goToNext = () => onNavigate('NEXT');
+  const goToToday = () => onNavigate('TODAY');
 
   return (
     <div className="rbc-toolbar">
@@ -62,50 +62,74 @@ const CustomToolbar = ({ label, onNavigate }) => {
         <button onClick={goToNext}>Avanti</button>
       </span>
       <span className="rbc-toolbar-label">{label}</span>
+      <span className="rbc-btn-group">
+        {views.map(v => (
+          <button
+            key={v}
+            onClick={() => onView(v)}
+            className={v === view ? 'rbc-active' : ''}
+          >
+            {v === 'month' ? 'Mese' :
+              v === 'week' ? 'Settimana' :
+                v === 'day' ? 'Giorno' :
+                  v === 'agenda' ? 'Agenda' : v}
+          </button>
+        ))}
+      </span>
     </div>
   );
 };
 
+/**
+ * PazienteAppuntamenti: Componente principale che mostra il calendario
+ */
 export default function PazienteAppuntamenti() {
-  // Stato per la data corrente
   const [date, setDate] = useState(new Date(2025, 2, 31));
+  const [currentView, setCurrentView] = useState('month');
+  const [eventoSelezionato, setEventoSelezionato] = useState(null);
 
-  // Funzione per gestire la navigazione, usando l'updater per accedere sempre al valore aggiornato
-  const handleNavigate = (action) => {
-    setDate((prevDate) => {
-      let newDate;
-      if (action === 'TODAY') {
-        newDate = new Date();
-      } else if (action === 'PREV') {
-        newDate = new Date(prevDate);
-        newDate.setDate(newDate.getDate() - 7);
-      } else if (action === 'NEXT') {
-        newDate = new Date(prevDate);
-        newDate.setDate(newDate.getDate() + 7);
-      }
-      return newDate;
-    });
+  // Gestisce la navigazione tra le date
+  const handleNavigate = (newDate) => {
+    setDate(newDate);
+  };
+
+  // Gestisce il cambio di vista (mese, settimana, giorno, agenda)
+  const handleViewChange = (view) => {
+    setCurrentView(view);
+  };
+
+  // Apre la modale con i dettagli dell'appuntamento
+  const handleDoubleClickEvent = (event) => {
+    setEventoSelezionato(event);
   };
 
   return (
-    <div className="flex centerx" style={{ paddingBottom: '50px', paddingTop: '50px' }}>
+    <div className="flex centerx" style={{ padding: '50px 0' }}>
       <div style={{ height: '500px', width: '80%' }}>
         <Calendar
           localizer={localizer}
-          culture="it"                   // Imposta la cultura in italiano
+          culture="it"
           events={events}
           startAccessor="start"
           endAccessor="end"
-          view="week"                    // Vista iniziale
-          date={date}                    // Data controllata
-          onNavigate={handleNavigate}    // Gestione della navigazione
+          date={date}
+          view={currentView}
+          onNavigate={handleNavigate}
+          onView={handleViewChange}
+          onDoubleClickEvent={handleDoubleClickEvent}
           views={['month', 'week', 'day', 'agenda']}
-          messages={messages}            // Etichette in italiano
-          components={{
-            toolbar: CustomToolbar,
-          }}
+          messages={messages}
+          components={{ toolbar: CustomToolbar }}
         />
       </div>
+      {eventoSelezionato && <GeneralModal
+      title="Dettagli Appuntamento"
+        children={<PazienteViewAppuntamento
+          evento={eventoSelezionato}
+          onClose={() => setEventoSelezionato(null)}
+        />}
+        onClose={() => setEventoSelezionato(null)}
+      />}
     </div>
   );
 }

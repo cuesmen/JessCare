@@ -271,6 +271,50 @@
     transition: all 0.2s ease;
 }
 
+.paziente_add_main{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.paziente_add_main_form{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.paziente_add_main_form_lower{
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.paziente_add_form_group{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.219);
+    border-radius: 10px;
+    width: 100%;
+}
+
+.paziente_imp_actions_main_div{
+    padding-left: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
