@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLoader } from '../main/LoaderContext';
-import { useEffect } from 'react';
 import { FaHeart } from "react-icons/fa";
 
 const Dashboard = () => {
-
   const { hideLoader } = useLoader();
-  const [state, setState] = useState(0)
+  const [state, setState] = useState(0);
 
   useEffect(() => {
     hideLoader();
+
+    // Pre-carica l'immagine
+    const img = new Image();
+    img.src = "images/noi.jpg";
   }, [hideLoader]);
 
   const handleAvanti = () => {
     if (state < 5) {
       setState(state + 1);
     }
-  }
+  };
 
   return (
     <div className='MainDiv Dashboard_MainDiv'>
