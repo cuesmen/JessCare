@@ -108,6 +108,15 @@
     background-color: #e6e6e6; /* Colore al passaggio del mouse */
 }
 
+/* Evidenzia il giorno di oggi nella vista mese */
+.rbc-today {
+    background-color: var(--highlight-color); /* Colore di sfondo per il giorno di oggi */
+    color: #000000; /* Colore del testo */
+    border-radius: 4px; /* Aggiungi bordi arrotondati */
+    font-weight: bold; /* Testo in grassetto */
+    transition: background-color 0.3s ease;
+}
+
 .rbc-show-more {
     background-color: var(--primary-color-lighter); /* Cambia il colore di sfondo */
     color: var(--primary-color-darker); /* Cambia il colore del testo */
@@ -177,5 +186,59 @@
 @media screen and (max-width: 840px) {
     .rbc-btn-group2 {
         margin-bottom: 10px;
+    }
+}
+
+/* Miglioramenti per dispositivi mobili */
+@media screen and (max-width: 768px) {
+    .pazienti_appuntamenti_div_calendar {
+        padding: 8px;
+    }
+
+    .pazienti_appuntamenti_div_inner_calendar {
+        overflow-x: auto; /* Permette lo scrolling orizzontale se necessario */
+        -webkit-overflow-scrolling: touch; /* Migliora lo scrolling su dispositivi mobili */
+    }
+
+    .rbc-calendar {
+        font-size: 0.85rem; /* Riduce la dimensione del testo */
+    }
+
+    .rbc-toolbar {
+        flex-direction: column; /* Dispone gli elementi della toolbar in colonna */
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .rbc-toolbar .rbc-btn-group,
+    .rbc-toolbar .rbc-btn-group2 {
+        display: flex;
+        flex-wrap: wrap; /* Permette di andare a capo se necessario */
+        gap: 8px;
+    }
+
+    .rbc-toolbar-label {
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: left;
+        margin-bottom: 8px;
+    }
+
+    .rbc-day-bg {
+        height: 50px; /* Riduce l'altezza dei giorni */
+    }
+
+    .rbc-event {
+        font-size: 0.75rem; /* Riduce la dimensione del testo degli eventi */
+        padding: 2px 4px; /* Riduce il padding degli eventi */
+    }
+
+    .rbc-header {
+        font-size: 0.85rem; /* Riduce la dimensione del testo delle intestazioni */
+        padding: 4px; /* Riduce il padding delle intestazioni */
+    }
+
+    .rbc-agenda-content tr {
+        font-size: 0.85rem; /* Riduce la dimensione del testo nella vista Agenda */
     }
 }

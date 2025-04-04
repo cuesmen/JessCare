@@ -10,18 +10,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  --primary-color: #73c9a5;
-  --primary-color-darker: #46a57d;
-  --primary-color-darker-sidebar: #39746a;
-  --primary-color-darker-sidebar-hover: #2b524b;
-
-  --primary-color-darker-red: rgb(189, 29, 29);
-
-  --normal-black-color: rgb(40,40,40);
-  --normal-gray-color: rgb(100,100,100);
-
-  --sidebar-transition: all 0.4s ease-in-out;
 }
 
 ::selection {

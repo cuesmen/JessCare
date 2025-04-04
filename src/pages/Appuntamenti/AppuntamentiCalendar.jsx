@@ -35,7 +35,7 @@ const messages = {
   showMore: total => `+ altri ${total}`,
 };
 
-const CustomToolbar = ({ label, date, onNavigate, onView, views, view }) => {
+const CustomToolbar = ({ date, onNavigate, onView, views, view }) => {
 
   const formatLabel = () => {
     const mDate = moment(date).locale('it');
@@ -156,7 +156,7 @@ export default function AppuntamentiCalendar() {
   };
 
   return (
-    <div className="pazienti_appuntamenti_div_calendar">
+    <div className="pazienti_appuntamenti_div_calendar mobile-friendly">
       <div className='pazienti_appuntamenti_div_inner_calendar'>
         <Calendar
           className='appuntamenti_CALENDAR'
@@ -179,7 +179,7 @@ export default function AppuntamentiCalendar() {
           }}
           formats={{
             dayFormat: (date, culture, localizer) => moment(date).format('ddd DD/MM'),
-            weekdayFormat: (date, culture, localizer) => moment(date).format('dddd'),
+            weekdayFormat: (date, culture, localizer) => moment(date).format('dd'), // Abbreviazione dei giorni (L, M, M, G, V, S, D)
             monthHeaderFormat: (date, culture, localizer) => moment(date).format('MMMM YYYY'),
             dayHeaderFormat: (date, culture, localizer) => moment(date).format('dddd DD MMMM'),
             dayRangeHeaderFormat: ({ start, end }, culture, localizer) =>
