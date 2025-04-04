@@ -11,6 +11,7 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import PazienteImpActions from './PazienteImpActions';
 import { FaArrowRightLong } from "react-icons/fa6";
+import AppuntamentiCalendar from '../../Appuntamenti/Calendar/AppuntamentiCalendar';
 
 export default function PazientePage() {
     const { showLoader, hideLoader } = useLoader();
@@ -67,7 +68,7 @@ export default function PazientePage() {
             toRet = [{ label: "Pazienti", path: "/pazienti?", active: false }];
         return toRet;
     }
-    
+
     const breadcrumbs = paziente ? [...computerLabel()] : [];
 
     const handleOnClickGoBack = () => {
@@ -105,7 +106,7 @@ export default function PazientePage() {
                                     </div>
                                 </div >
                                 <div className='paziente_modal_main_left'>
-                                    <div className='paziente_modal_main_left_icon'><FaArrowRightLong/></div>
+                                    <div className='paziente_modal_main_left_icon'><FaArrowRightLong /></div>
                                     <PazienteInfoCard title="Sesso" desc={computeSex(paziente.sex)} />
                                     <PazienteInfoCard title="Status" desc={paziente.exit ? "Concluso" : "In Corso"} />
                                     <PazienteInfoCard title="Età" desc={computeAge(paziente.birth)} />
@@ -118,8 +119,10 @@ export default function PazientePage() {
                                 </div>
                             </div>
                         </div>
-                        <PazienteAppuntamenti />
-                        <PazienteImpActions paziente={paziente} status={statusQuery}/>
+                        <div className='paziente_page_appuntamenti_calendar'>
+                            <AppuntamentiCalendar paziente={paziente} />
+                        </div>
+                        <PazienteImpActions paziente={paziente} status={statusQuery} />
                     </div>
                 </>
             )}

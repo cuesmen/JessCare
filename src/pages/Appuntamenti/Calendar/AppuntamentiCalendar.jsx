@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import AppuntamentoView from '../AppuntamentoView';
+import AppuntamentoView from '../AppuntamentoView'; // Importa AppuntamentoView
 import GeneralModal from "../../../components/general_modal";
 import { supabase } from '../../../supabaseClient';
-import { useLoader } from "../../../main/LoaderContext"; 
-import CalendarToolbar from "./CalendarToolbar"
+import { useLoader } from "../../../main/LoaderContext";
+import CalendarToolbar from "./CalendarToolbar";
 import moment from 'moment';
 import 'moment/dist/locale/it';
 
@@ -35,25 +35,30 @@ const messages = {
   showMore: total => `+ altri ${total}`,
 };
 
-
-export default function AppuntamentiCalendar() {
+export default function AppuntamentiCalendar({ paziente }) {
   const [date, setDate] = useState(new Date());
   const [currentView, setCurrentView] = useState('month');
-  const [eventoSelezionato, setEventoSelezionato] = useState(null);
   const [events, setEvents] = useState([]);
-  const { showLoader, hideLoader } = useLoader(); // 👉 usa il loader
+  const [eventoSelezionato, setEventoSelezionato] = useState(null); // Stato per l'evento selezionato
+  const { showLoader, hideLoader } = useLoader();
 
   useEffect(() => {
     fetchAppuntamenti();
-  }, []);
+  }, [paziente]);
 
   const fetchAppuntamenti = async () => {
-    showLoader(); // 👉 mostra loader
+    showLoader();
 
     try {
-      const { data, error } = await supabase
+      const query = supabase
         .from('Appuntamenti')
         .select('*');
+
+      if (paziente?.id) {
+        query.eq('id_paziente', paziente.id);
+      }
+
+      const { data, error } = await query;
 
       if (error) {
         console.error("Errore nel recupero degli appuntamenti:", error.message);
@@ -80,24 +85,15 @@ export default function AppuntamentiCalendar() {
 
       setEvents(eventiFormattati);
     } finally {
-      hideLoader(); // 👉 nascondi loader sempre
+      hideLoader();
     }
   };
 
   const handleNavigate = (newDate) => setDate(newDate);
   const handleViewChange = (view) => setCurrentView(view);
-  const handleDoubleClickEvent = (event) => setEventoSelezionato(event);
 
-  const handleSelectSlot = (slotInfo) => {
-    // Cambia la vista a "day" e imposta la data selezionata
-    setCurrentView('day');
-    setDate(slotInfo.start);
-  };
-
-  const handleDoubleClickSlot = (slotInfo) => {
-    // Cambia la vista a "day" e imposta la data selezionata
-    setCurrentView('day');
-    setDate(slotInfo.start);
+  const handleDoubleClickEvent = (event) => {
+    setEventoSelezionato(event); // Imposta l'evento selezionato
   };
 
   return (
@@ -114,9 +110,7 @@ export default function AppuntamentiCalendar() {
           view={currentView}
           onNavigate={handleNavigate}
           onView={handleViewChange}
-          onDoubleClickEvent={handleDoubleClickEvent}
-          onSelectSlot={handleSelectSlot} // Clic su uno slot vuoto
-          onDoubleClickSlot={handleDoubleClickSlot} // Doppio clic su uno slot vuoto
+          onDoubleClickEvent={handleDoubleClickEvent} // Doppio clic su un evento
           views={['month', 'week', 'day', 'agenda']}
           messages={messages}
           components={{
@@ -124,7 +118,7 @@ export default function AppuntamentiCalendar() {
           }}
           formats={{
             dayFormat: (date, culture, localizer) => moment(date).format('ddd DD/MM'),
-            weekdayFormat: (date, culture, localizer) => moment(date).format('dd'), // Abbreviazione dei giorni (L, M, M, G, V, S, D)
+            weekdayFormat: (date, culture, localizer) => moment(date).format('dd'),
             monthHeaderFormat: (date, culture, localizer) => moment(date).format('MMMM YYYY'),
             dayHeaderFormat: (date, culture, localizer) => moment(date).format('dddd DD MMMM'),
             dayRangeHeaderFormat: ({ start, end }, culture, localizer) =>
@@ -144,10 +138,10 @@ export default function AppuntamentiCalendar() {
           children={
             <AppuntamentoView
               evento={eventoSelezionato}
-              onClose={() => setEventoSelezionato(null)}
+              onClose={() => setEventoSelezionato(null)} // Chiudi la modale
             />
           }
-          onClose={() => setEventoSelezionato(null)}
+          onClose={() => setEventoSelezionato(null)} // Chiudi la modale
         />
       )}
     </div>
