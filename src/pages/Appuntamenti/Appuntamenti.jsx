@@ -1,5 +1,5 @@
 import React from 'react';
-import AppuntamentiCalendar from './AppuntamentiCalendar';
+import AppuntamentiCalendar from './Calendar/AppuntamentiCalendar';
 import GeneralNavigation from '../../components/GeneralNavigation/general_navigation';
 import { FaCalendarPlus } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';

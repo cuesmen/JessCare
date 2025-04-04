@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import AppuntamentoView from './AppuntamentoView';
-import GeneralModal from "../../components/general_modal";
-import { supabase } from '../../supabaseClient';
-import { useLoader } from "../../main/LoaderContext"; // 👉 importa il loader
-import { useNavigate } from "react-router-dom"; // 👉 importa useNavigate
+import AppuntamentoView from '../AppuntamentoView';
+import GeneralModal from "../../../components/general_modal";
+import { supabase } from '../../../supabaseClient';
+import { useLoader } from "../../../main/LoaderContext"; 
+import CalendarToolbar from "./CalendarToolbar"
 import moment from 'moment';
 import 'moment/dist/locale/it';
 
@@ -35,60 +35,6 @@ const messages = {
   showMore: total => `+ altri ${total}`,
 };
 
-const CustomToolbar = ({ date, onNavigate, onView, views, view }) => {
-
-  const formatLabel = () => {
-    const mDate = moment(date).locale('it');
-
-    switch (view) {
-      case 'month':
-        return mDate.format('MMMM YYYY'); // "Aprile 2025"
-      case 'week': {
-        const startOfWeek = mDate.clone().startOf('week');
-        const endOfWeek = mDate.clone().endOf('week');
-        return `${startOfWeek.format('D MMMM')} – ${endOfWeek.format('D MMMM')}`;
-      }
-      case 'day':
-        return mDate.format('dddd D MMMM YYYY'); // <-- qui il fix
-      case 'agenda':
-        return 'Agenda';
-      default:
-        return '';
-    }
-  };
-
-
-  const goToBack = () => onNavigate('PREV');
-  const goToNext = () => onNavigate('NEXT');
-  const goToToday = () => onNavigate('TODAY');
-
-  return (
-    <div className="rbc-toolbar">
-      <span className="rbc-btn-group2">
-        <button onClick={goToBack}>Indietro</button>
-        <button onClick={goToToday}>Oggi</button>
-        <button onClick={goToNext}>Avanti</button>
-      </span>
-      <span className="rbc-toolbar-label">
-        {formatLabel()}
-      </span>
-      <span className="rbc-btn-group">
-        {views.map(v => (
-          <button
-            key={v}
-            onClick={() => onView(v)}
-            className={v === view ? 'rbc-active' : ''}
-          >
-            {v === 'month' ? 'Mese' :
-              v === 'week' ? 'Settimana' :
-                v === 'day' ? 'Giorno' :
-                  v === 'agenda' ? 'Agenda' : v}
-          </button>
-        ))}
-      </span>
-    </div>
-  );
-};
 
 export default function AppuntamentiCalendar() {
   const [date, setDate] = useState(new Date());
@@ -96,7 +42,6 @@ export default function AppuntamentiCalendar() {
   const [eventoSelezionato, setEventoSelezionato] = useState(null);
   const [events, setEvents] = useState([]);
   const { showLoader, hideLoader } = useLoader(); // 👉 usa il loader
-  const navigate = useNavigate(); // 👉 inizializza useNavigate
 
   useEffect(() => {
     fetchAppuntamenti();
@@ -175,7 +120,7 @@ export default function AppuntamentiCalendar() {
           views={['month', 'week', 'day', 'agenda']}
           messages={messages}
           components={{
-            toolbar: (props) => <CustomToolbar {...props} date={props.date} />
+            toolbar: (props) => <CalendarToolbar {...props} date={props.date} />
           }}
           formats={{
             dayFormat: (date, culture, localizer) => moment(date).format('ddd DD/MM'),

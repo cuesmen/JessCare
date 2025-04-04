@@ -9,7 +9,19 @@ export default function Navbar() {
   const location = useLocation();
   const pathName = location.pathname;
   
-  const displayText = pathName === "/" ? "Home" : pathName.substring(1).replace(/-/g, " ");
+  // Mappatura dei percorsi con nomi personalizzati
+  const pathNameMapping = {
+    "/paziente-modifica": "Modifica Paziente",
+    "/paziente-add": "Aggiungi Paziente",
+    "/appuntamento-aggiungi": "Aggiungi Appuntamento",
+    "/appuntamento-modifica": "Modifica Appuntamento",
+    "/pazienti": "Lista Pazienti",
+    "/appuntamenti": "Lista Appuntamenti",
+  };
+
+  // Determina il testo da visualizzare
+  const displayText = pathNameMapping[pathName] || 
+    (pathName === "/" ? "Home" : pathName.substring(1).replace(/-/g, " "));
 
   const { session } = useAuth();
   const email = session?.user?.email || "default@example.com";

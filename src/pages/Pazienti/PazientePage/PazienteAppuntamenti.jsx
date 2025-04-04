@@ -5,7 +5,6 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/it';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import PazienteViewAppuntamento from './PazienteViewAppuntamento';
 import GeneralModal from "../../../components/general_modal"
 
 // Inizializza moment con la lingua italiana

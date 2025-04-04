@@ -49,7 +49,10 @@
   text-transform: capitalize;
   font-size: 17px;
   font-weight: 650;
-  width: 200px;
+  width: 100%;;
+  white-space: nowrap; /* Forza il testo su una sola riga */
+  overflow: hidden; /* Nasconde il testo che eccede */
+  text-overflow: ellipsis; /* Aggiunge "..." se il testo è troppo lungo */
 }
 
 .Navbar_AccountDiv_Wrapper {
