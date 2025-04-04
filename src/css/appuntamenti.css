@@ -1,10 +1,6 @@
 .AppuntamentoView_Card {
     height: 100%;
     width: 100%;
-}
-
-
-.AppuntamentoView_Card {
     border: 1px solid #dddddd00;
     border-radius: 8px;
     padding: 16px;
@@ -48,7 +44,6 @@
     color: var(--primary-color-darker);
 }
 
-
 .AppuntamentoView_Actions {
     display: flex;
     align-items: center;
@@ -57,20 +52,130 @@
     margin-top: 16px;
 }
 
+.appuntamenti_CALENDAR {
+    color: var(--primary-color-darker);
+}
 
+.rbc-toolbar button {
+    background-color: var(--primary-color-darker); /* Cambia il colore di sfondo */
+    color: #ffffff; /* Cambia il colore del testo */
+    border: none; /* Rimuovi il bordo */
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.rbc-toolbar button:hover {
+    background-color: var(--primary-color-darker-sidebar-hover); 
+    color: white;
+}
 
+.rbc-event {
+    background-color: var(--primary-color-darker); /* Cambia il colore di sfondo */
+    color: #fff; /* Cambia il colore del testo */
+    border-radius: 4px; /* Aggiungi bordi arrotondati */
+    padding: 4px;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+}
 
+.rbc-event:hover {
+    transform: scale(1.05); /* Effetto zoom al passaggio del mouse */
+    background-color: var(--primary-color-darker-sidebar-hover); /* Cambia il colore al passaggio del mouse */
+}
 
+.rbc-selected {
+    background-color: var(--primary-color-darker-sidebar-hover); 
+}
 
+.rbc-header {
+    background-color: var(--primary-color-lighter); /* Cambia il colore di sfondo */
+    color: var(--primary-color-darker); /* Cambia il colore del testo */
+    font-weight: bold;
+    text-align: center;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    
+}
 
+.rbc-day-bg {
+    background-color: #f9f9f9; /* Colore di sfondo */
+    transition: background-color 0.3s ease;
+}
 
+.rbc-day-bg:hover {
+    background-color: #e6e6e6; /* Colore al passaggio del mouse */
+}
 
+.rbc-show-more {
+    background-color: var(--primary-color-lighter); /* Cambia il colore di sfondo */
+    color: var(--primary-color-darker); /* Cambia il colore del testo */
+    border: none; /* Rimuovi il bordo */
+    padding: 4px 8px;
+    border-radius: 4px; /* Aggiungi bordi arrotondati */
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
+.rbc-show-more:hover {
+    background-color: var(--primary-color-darker); /* Cambia il colore di sfondo al passaggio del mouse */
+    color: #fff; /* Cambia il colore del testo al passaggio del mouse */
+}
+
+/* Intestazione della vista Agenda */
+.rbc-agenda-header {
+    background-color: var(--primary-color-lighter); /* Cambia il colore di sfondo */
+    color: var(--primary-color-darker); /* Cambia il colore del testo */
+    font-weight: bold;
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Riga di un evento nella vista Agenda */
+.rbc-agenda-content tr {
+    background-color: #f9f9f9; /* Colore di sfondo */
+    color: #555; /* Colore del testo */
+    transition: background-color 0.3s ease;
+}
+
+.rbc-agenda-content tr:hover {
+    background-color: #e6e6e6; /* Colore al passaggio del mouse */
+}
+
+/* Colonna della data nella vista Agenda */
+.rbc-agenda-date-cell {
+    color: var(--primary-color-darker); /* Cambia il colore del testo */
+    font-weight: bold;
+    padding: 8px;
+}
+
+/* Colonna dell'ora nella vista Agenda */
+.rbc-agenda-time-cell {
+    color: var(--secondary-color); /* Cambia il colore del testo */
+    font-style: italic;
+    padding: 8px;
+}
+
+/* Colonna del titolo dell'evento nella vista Agenda */
+.rbc-agenda-event-cell {
+    color: #333; /* Cambia il colore del testo */
+    padding: 8px;
+}
+
+/* Riga vuota nella vista Agenda */
+.rbc-agenda-empty {
+    background-color: #fff; /* Colore di sfondo */
+    color: #999; /* Colore del testo */
+    text-align: center;
+    padding: 16px;
+    font-style: italic;
+}
 
 @media screen and (max-width: 840px) {
     .rbc-btn-group2 {
         margin-bottom: 10px;
     }
 }
-

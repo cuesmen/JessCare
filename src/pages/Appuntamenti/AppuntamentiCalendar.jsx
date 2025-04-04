@@ -5,6 +5,7 @@ import AppuntamentoView from './AppuntamentoView';
 import GeneralModal from "../../components/general_modal";
 import { supabase } from '../../supabaseClient';
 import { useLoader } from "../../main/LoaderContext"; // 👉 importa il loader
+import { useNavigate } from "react-router-dom"; // 👉 importa useNavigate
 import moment from 'moment';
 import 'moment/dist/locale/it';
 
@@ -95,6 +96,7 @@ export default function AppuntamentiCalendar() {
   const [eventoSelezionato, setEventoSelezionato] = useState(null);
   const [events, setEvents] = useState([]);
   const { showLoader, hideLoader } = useLoader(); // 👉 usa il loader
+  const navigate = useNavigate(); // 👉 inizializza useNavigate
 
   useEffect(() => {
     fetchAppuntamenti();
@@ -141,10 +143,23 @@ export default function AppuntamentiCalendar() {
   const handleViewChange = (view) => setCurrentView(view);
   const handleDoubleClickEvent = (event) => setEventoSelezionato(event);
 
+  const handleSelectSlot = (slotInfo) => {
+    // Cambia la vista a "day" e imposta la data selezionata
+    setCurrentView('day');
+    setDate(slotInfo.start);
+  };
+
+  const handleDoubleClickSlot = (slotInfo) => {
+    // Cambia la vista a "day" e imposta la data selezionata
+    setCurrentView('day');
+    setDate(slotInfo.start);
+  };
+
   return (
     <div className="pazienti_appuntamenti_div_calendar">
       <div className='pazienti_appuntamenti_div_inner_calendar'>
         <Calendar
+          className='appuntamenti_CALENDAR'
           localizer={localizer}
           culture="it"
           events={events}
@@ -155,6 +170,8 @@ export default function AppuntamentiCalendar() {
           onNavigate={handleNavigate}
           onView={handleViewChange}
           onDoubleClickEvent={handleDoubleClickEvent}
+          onSelectSlot={handleSelectSlot} // Clic su uno slot vuoto
+          onDoubleClickSlot={handleDoubleClickSlot} // Doppio clic su uno slot vuoto
           views={['month', 'week', 'day', 'agenda']}
           messages={messages}
           components={{
