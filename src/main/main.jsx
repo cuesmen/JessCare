@@ -9,6 +9,7 @@ import '../css/loader.css'
 import '../css/navbar.css'
 import '../css/pazienti.css'
 import '../css/dashboard.css'
+import '../css/appuntamenti.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

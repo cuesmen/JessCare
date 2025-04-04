@@ -3,6 +3,7 @@ import { supabase } from "../../../supabaseClient";
 import IconInput from "../../../components/IconInput";
 import IconDate from "../../../components/IconDate";
 import IconTime from "../../../components/IconTime";
+import IconSelect from "../../../components/IconSelect"; // Importa IconSelect
 import GeneralNavigation from "../../../components/GeneralNavigation/general_navigation";
 import Alert from "../../../components/alert";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +29,8 @@ export default function AppuntamentoAdd({ modify }) {
         Title: "",
         Description: ""
     });
+
+    const [patients, setPatients] = useState([]); // Stato per i pazienti
 
     const navigate = useNavigate();
 
@@ -119,7 +122,21 @@ export default function AppuntamentoAdd({ modify }) {
         }
     };
 
+    const fetchPatients = async () => {
+        const { data, error } = await supabase
+            .from("Paziente")
+            .select("id, name, surname");
+
+        if (error) {
+            console.error("Errore nel recupero dei pazienti:", error);
+            showAlert("error", "Errore", "Errore nel recupero dei pazienti.");
+        } else {
+            setPatients(data);
+        }
+    };
+
     useEffect(() => {
+        fetchPatients(); // Recupera i pazienti all'inizio
         if (modify) fetchAppuntamentoById();
     }, []);
 
@@ -156,8 +173,29 @@ export default function AppuntamentoAdd({ modify }) {
                                 <IconDate title="Data *" type="date" name="date" value={form.date} onChange={handleChange} icon={<FaCalendarAlt />} />
                                 <IconTime title="Ora Inizio *" name="hour_start" value={form.hour_start} onChange={handleChange} icon={<FaClock />} />
                                 <IconTime title="Ora Fine *" name="hour_end" value={form.hour_end} onChange={handleChange} icon={<FaClock />} />
-                                <IconInput title="ID Paziente *" type="number" name="id_paziente" value={form.id_paziente} onChange={handleChange} icon={<FaUser />} />
-                                <IconInput title="Note" type="text" name="notes" value={form.notes} onChange={handleChange} icon={<FaStickyNote />} />
+                                
+                                <IconSelect
+                                    title="Paziente *"
+                                    name="id_paziente"
+                                    value={form.id_paziente}
+                                    onChange={handleChange}
+                                    required
+                                    icon={<FaUser />}
+                                    options={patients.map((patient) => ({
+                                        value: patient.id,
+                                        label: `${patient.name} ${patient.surname}`
+                                    }))}
+                                />
+
+                                <IconInput
+                                    title="Note"
+                                    type="textarea" // Cambia il tipo in "textarea"
+                                    name="notes"
+                                    value={form.notes}
+                                    onChange={handleChange}
+                                    icon={<FaStickyNote />}
+                                    height="200px" // Altezza personalizzata più lunga
+                                />
                             </div>
                         </div>
                         <div className="paziente_add_form_actions">

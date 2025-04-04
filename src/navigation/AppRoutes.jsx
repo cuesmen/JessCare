@@ -53,6 +53,7 @@ const AppRoutes = () => {
                       <Route path="/dettagli-paziente" element={<PazientePage />} />
                       <Route path="/appuntamenti" element={<Appuntamenti />} />
                       <Route path="/appuntamento-aggiungi" element={<AppuntamentiAdd />} />
+                      <Route path="/appuntamento-modifica" element={<AppuntamentiAdd modify={true} />} />
                       <Route path="*" element={<Navigate to="/dashboard" replace />} />
                     </Routes>
               </ProtectedRoute>

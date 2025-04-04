@@ -45,6 +45,48 @@
     transition: all 0.3s ease;
 }
 
+.input_main textarea{
+    background-color: white;
+    border: none;
+    width: 100%;
+    color: rgb(19, 19, 19);
+    padding: 0px 0px 0px 5px;
+    resize: none;
+}
+
+.input_main textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px rgb(231, 231, 231) inset !important;
+    -webkit-text-fill-color: rgb(19, 19, 19) !important;
+}
+
+
+.input_main textarea:focus {
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input_main select{
+    background-color: white;
+    border: none;
+    width: 100%;
+    color: rgb(19, 19, 19);
+    padding: 0px 0px 0px 5px;
+    resize: none;
+}
+
+.input_main select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px rgb(231, 231, 231) inset !important;
+    -webkit-text-fill-color: rgb(19, 19, 19) !important;
+}
+
+
+.input_main select:focus{
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
 .general_modal_upper {
     height: 100%;
     width: 100%;
@@ -58,7 +100,8 @@
 .general_modal {
     background-color: rgb(255, 255, 255);
     width: 85%;
-    height: 90%;
+    height: auto;
+    max-height: 90%;
     border-radius: 20px;
     padding: 15px;
 }

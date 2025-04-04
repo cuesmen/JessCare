@@ -63,7 +63,7 @@ const CustomToolbar = ({ label, date, onNavigate, onView, views, view }) => {
 
   return (
     <div className="rbc-toolbar">
-      <span className="rbc-btn-group">
+      <span className="rbc-btn-group2">
         <button onClick={goToBack}>Indietro</button>
         <button onClick={goToToday}>Oggi</button>
         <button onClick={goToNext}>Avanti</button>
