@@ -17,7 +17,7 @@ import GeneralNavigation from "../../../components/GeneralNavigation/general_nav
 import { IoArrowBackCircle } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import Alert from "../../../components/alert"
-import { computeFirstBySex } from './utils';
+import { computeFirstBySex } from '../../../utils/utils'
 import { useLoader } from "../../../main/LoaderContext";
 
 

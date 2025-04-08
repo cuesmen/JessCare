@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { computeAge, computeSex } from '../PazienteAdd/utils';
+import { computeAge, computeSex } from "../../../utils/utils"
 /**
  * Componente PazienteCard:
  * Visualizza una card compatta con le informazioni principali di un paziente,

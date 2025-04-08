@@ -11,6 +11,7 @@ import '../css/navbar.css'
 import '../css/pazienti.css'
 import '../css/dashboard.css'
 import '../css/appuntamenti.css'
+import '../css/colloqui.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

@@ -8,6 +8,7 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { BsPersonRaisedHand } from "react-icons/bs";
 import { FaCalendarDay } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
+import { FiBookOpen  } from 'react-icons/fi';
 
 import { useLoader } from '../main/LoaderContext';
 import { useAuth } from "../context/AuthContext"
@@ -43,7 +44,7 @@ export default function Sidebar({ open, onClose }) {
   return (
     <div className={`Sidebar_MainDiv ${open ? "open" : ""}`}>
       <div className={`Sidebar_Img ${!open ? "non_open" : ""}`}>
-        <img alt="logo" src={open? "images/logo/grande/logo_full_white.png" : "images/logo/piccolo/logo_small_white.png"} />
+        <img alt="logo" src={open ? "images/logo/grande/logo_full_white.png" : "images/logo/piccolo/logo_small_white.png"} />
       </div>
       {email && <div className='Sidebar_AccountDiv'>
         <div className={`Sidebar_AccountDiv_Inner ${!open ? "non_open" : ""}`}>
@@ -79,6 +80,14 @@ export default function Sidebar({ open, onClose }) {
           GoTo="/appuntamenti"
           onClose={onClose}
           active={isActive("/appuntamenti")}
+        />
+        <SidebarButton
+          nonOpen={!open}
+          Title="Colloqui"
+          Icon={<FiBookOpen  />}
+          GoTo="/colloqui"
+          onClose={onClose}
+          active={isActive("/colloqui")}
         />
       </div>
       <div className={`Sidebar_LowerMain ${!open ? "non_open" : ""}`}>

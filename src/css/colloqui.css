@@ -1,0 +1,81 @@
+.colloqui-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.colloquio-card {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.colloquio-card h3 {
+  margin: 0 0 10px;
+}
+
+.colloquio-card p {
+  margin: 5px 0;
+}
+
+.colloqui-upper-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--normal-gray-color);
+  border-radius: 5px;
+}
+
+.search-button {
+  background-color: var(--primary-color-darker);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--sidebar-transition);
+}
+
+.search-button:hover {
+  background-color: var(--primary-color-darker-sidebar-hover);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  background-color: var(--primary-color-darker);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--sidebar-transition);
+}
+
+.pagination button:disabled {
+  background-color: var(--normal-gray-color);
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
+  color: var(--normal-black-color);
+}

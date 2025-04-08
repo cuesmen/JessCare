@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { computeAge, computeSex, computeFirstBySex, formatDateTime } from '../PazienteAdd/utils';
+import { computeAge, computeSex, computeFirstBySex, formatDateTime } from "../../../utils/utils";
 import { supabase } from '../../../supabaseClient';
 import { useLoader } from "../../../main/LoaderContext";
 import { useState, useEffect } from 'react';
