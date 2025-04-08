@@ -1,3 +1,7 @@
+.ColloquiMainDiv{
+  padding-bottom: 75px;
+}
+
 .colloqui-container {
   display: flex;
   flex-wrap: wrap;
@@ -7,35 +11,107 @@
 }
 
 .colloquio-card {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  background-color: white;
+  color: var(--normal-black-color);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  width: 320px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
+.colloquio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.colloquio-card-icon{
+  position: absolute;
+  top:15px;
+  right:15px;
+  color:var(--primary-color-darker);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+
+.colloquio-card-icon:hover{
+  color:var(--primary-color-darker-sidebar);
+  transition: all 0.2s ease;
+}
+
+
 .colloquio-card h3 {
-  margin: 0 0 10px;
+  margin: 0 0 15px;
+  font-size: 20px;
+  color: var(--normal-black-color);
+  text-align: center;
 }
 
 .colloquio-card p {
-  margin: 5px 0;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  word-wrap: break-word;
+  /* Ensures long words break */
+  overflow-wrap: break-word;
+  /* Modern equivalent for word wrapping */
+  word-break: break-word;
+  /* Forces text to break and wrap */
+  white-space: normal;
+  /* Ensures text wraps to the next line */
+}
+
+
+.colloquio-card p strong {
+  font-weight: bold;
+  color: var(--primary-color-darker);
+}
+
+.colloquio-card .icon {
+  font-size: 18px;
+  color: var(--primary-color-darker);
+}
+
+.colloquio-card .note {
+  margin-top: 15px;
+  font-style: italic;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.colloquio-card .note strong {
+  color: var(--primary-color-darker);
 }
 
 .colloqui-upper-bar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.colloqui-search-section {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
 }
 
-.search-input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid var(--normal-gray-color);
-  border-radius: 5px;
+.search-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .search-button {
@@ -52,11 +128,27 @@
   background-color: var(--primary-color-darker-sidebar-hover);
 }
 
+.clear-button {
+  background-color: var(--normal-gray-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: var(--sidebar-transition);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.clear-button:hover {
+  background-color: var(--primary-color-darker-sidebar-hover);
+}
+
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
   gap: 10px;
 }
 
@@ -79,3 +171,5 @@
   font-size: 16px;
   color: var(--normal-black-color);
 }
+
+

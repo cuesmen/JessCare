@@ -12,13 +12,12 @@
 
 .pazienti_upper_bar {
     width: 90%;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgba(0, 0, 0, 0.152);
-    padding: 5px;
+    padding-bottom: 10px;
     border-radius: 10px;
     display: flex;
     gap: 10px;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
 .pazienti_upper_bar_addUser {
@@ -298,7 +297,7 @@
     width: 100%;
 }
 
-.paziente_imp_actions_main_div button{
+.paziente_imp_actions_main_div button {
     width: 180px;
 }
 
@@ -308,13 +307,13 @@
     gap: 7px;
 }
 
-.paziente_imp_actions_main_div_upper{
+.paziente_imp_actions_main_div_upper {
     padding-left: 15px;
     padding-top: 10px;
     border-top: 1px solid rgba(0, 0, 0, 0.226);
 }
 
-.paziente_imp_actions_main_div_upper h1{
+.paziente_imp_actions_main_div_upper h1 {
     font-size: 15px;
     font-weight: 700;
     color: var(--normal-color-color);
@@ -324,7 +323,7 @@
 
 
 
-.paziente_modal_main_left_icon{
+.paziente_modal_main_left_icon {
     display: none;
 }
 
@@ -337,7 +336,7 @@
 
 
 /*APPUNTAMENTI*/
-.pazienti_appuntamenti_div{
+.pazienti_appuntamenti_div {
     width: 100%;
     height: 500px;
     display: flex;
@@ -346,12 +345,12 @@
     padding-top: 50px;
 }
 
-.pazienti_appuntamenti_div_inner{
+.pazienti_appuntamenti_div_inner {
     width: 90%;
     height: 100%;
 }
 
-.pazienti_appuntamenti_div_calendar{
+.pazienti_appuntamenti_div_calendar {
     width: 100%;
     min-height: 500px;
     height: 100vh;
@@ -361,19 +360,20 @@
     padding-right: 10px;
     padding-left: 10px;
 }
-.pazienti_appuntamenti_div_inner_calendar{
+
+.pazienti_appuntamenti_div_inner_calendar {
     width: 90%;
     height: 90%;
 }
 
-.AppuntamentiMain{
+.AppuntamentiMain {
     padding-bottom: 0px;
 }
 
 
 
 
-.paziente_page_appuntamenti_calendar{
+.paziente_page_appuntamenti_calendar {
     padding-top: 20px;
     width: 100%;
 }
@@ -385,18 +385,58 @@
 
 
 
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.pazienti_upper_bar_pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.pazienti_upper_bar_pagination button {
+    background-color: var(--primary-color-darker);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--sidebar-transition);
+}
+
+.pazienti_upper_bar_pagination button:disabled {
+    background-color: var(--normal-gray-color);
+    cursor: not-allowed;
+}
+
+.pazienti_upper_bar_pagination span {
+    font-size: 16px;
+    color: var(--normal-black-color);
+}
+
+
+
+
+
 @media screen and (max-width: 730px) {
 
 
-    .paziente_modal_main_left{
+    .paziente_modal_main_left {
         position: relative;
     }
 
-    .paziente_modal_main_left_icon{
+    .paziente_modal_main_left_icon {
         position: absolute;
         display: block;
-        top:0;
-        right:0;
+        top: 0;
+        right: 0;
         font-size: 13px;
     }
 
@@ -430,7 +470,7 @@
         border-radius: 15px;
     }
 
-    .paziente_modal_main_gen{
+    .paziente_modal_main_gen {
         display: flex;
         flex-direction: column;
         align-items: center;
