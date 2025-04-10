@@ -14,7 +14,7 @@ import PazientiWrapper from '../pages/Pazienti/PazientiWrapper';
 import PazientePage from '../pages/Pazienti/PazientePage/PazientePage'
 import PazienteAdd from '../pages/Pazienti/PazienteAdd/PazienteAdd';
 import AppuntamentiAdd from '../pages/Appuntamenti/AppuntamentiAdd/AppuntamentiAdd';
-import Colloqui from '../pages/Colloqui/Colloqui';
+import ColloquiWrapper from '../pages/Colloqui/ColloquiWrapper';
 import ColloquioVisualize from '../pages/Colloqui/ColloquioVisualize/ColloquioVisualize';
 
 // Componente per proteggere le rotte (mostra un loader se ancora in caricamento)
@@ -56,7 +56,7 @@ const AppRoutes = () => {
                       <Route path="/appuntamenti" element={<Appuntamenti />} />
                       <Route path="/appuntamento-aggiungi" element={<AppuntamentiAdd />} />
                       <Route path="/appuntamento-modifica" element={<AppuntamentiAdd modify={true} />} />
-                      <Route path="/colloqui" element={<Colloqui />} />
+                      <Route path="/colloqui" element={<ColloquiWrapper />} />
                       <Route path="/colloquio-visualizza" element={<ColloquioVisualize />} />
                       <Route path="*" element={<Navigate to="/dashboard" replace />} />
                     </Routes>

@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import GeneralNavigation from '../../components/GeneralNavigation/general_navigation';
-import { useNavigate } from 'react-router-dom';
-import { LuBookPlus } from "react-icons/lu";
 import { supabase } from '../../supabaseClient';
 import ColloquiUpperBar from './ColloquioList/ColloquiUpperBar';
 import ColloquioCard from './ColloquioList/ColloquioCard';
 import { useLoader } from "../../main/LoaderContext";
 
-const Colloqui = () => {
-  const navigate = useNavigate();
+const ColloquiLista = () => {
   const { showLoader, hideLoader } = useLoader();
   const [colloqui, setColloqui] = useState([]);
   const [filteredColloqui, setFilteredColloqui] = useState([]);
@@ -79,17 +75,9 @@ const Colloqui = () => {
     setCurrentPage(1); // Reset to the first page
   };
 
-  let breadcrumbs = [
-    { label: "Colloqui", path: "/Colloqui", active: true },
-  ];
 
   return (
-    <div className='MainDiv ColloquiMainDiv'>
-      <GeneralNavigation
-        breadcrumbs={breadcrumbs}
-        icon1={<LuBookPlus />}
-        icon1OnClick={() => navigate("/colloquio")}
-      />
+    <>
       <ColloquiUpperBar
         onSearch={handleSearch}
         currentPage={currentPage}
@@ -104,8 +92,8 @@ const Colloqui = () => {
           <ColloquioCard key={colloquio.id} colloquio={colloquio} />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
-export default Colloqui;
+export default ColloquiLista;

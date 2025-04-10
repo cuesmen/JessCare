@@ -6,8 +6,12 @@ export default function GeneralNavigation({ breadcrumbs, icon2, icon2OnClick, ic
   const navigate = useNavigate();
 
   const handleCrumBlick = (crumb) => {
-    navigate("/pazienti?&status=none");
     if (crumb.onClick === "reloadPAZ") {
+      navigate("/pazienti?&status=none");
+      window.location.reload();
+    }
+    else if (crumb.onClick === "reloadCOLL") {
+      navigate("/colloqui");
       window.location.reload();
     }
   };

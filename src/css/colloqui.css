@@ -26,7 +26,6 @@
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-
 .colloquio-card-icon{
   position: absolute;
   top:15px;
@@ -36,12 +35,10 @@
   cursor: pointer;
 }
 
-
 .colloquio-card-icon:hover{
   color:var(--primary-color-darker-sidebar);
   transition: all 0.2s ease;
 }
-
 
 .colloquio-card h3 {
   margin: 0 0 15px;
@@ -65,7 +62,6 @@
   white-space: normal;
   /* Ensures text wraps to the next line */
 }
-
 
 .colloquio-card p strong {
   font-weight: bold;
@@ -170,6 +166,86 @@
 .pagination span {
   font-size: 16px;
   color: var(--normal-black-color);
+}
+
+
+.colloqui-paziente-results{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 20px 0px 20px;
+}
+
+
+
+.colloqui_paziente_card {
+  background-color: white;
+  color: var(--normal-black-color);
+  border-radius: 12px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row-reverse;
+  max-height: 75px;
+  transition: all 0.3s ease;
+}
+
+.colloqui_paziente_card.expanded {
+  max-height: 600px;
+  transition: all 0.3s ease;
+}
+
+.colloqui_paziente_toggle {
+  color: var(--primary-color-darker);
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.colloqui_paziente_card.expanded .colloqui_paziente_toggle {
+  padding-right: 5px;
+  transform: rotate(180deg);
+}
+
+.colloqui_paziente_content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 20px;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.colloqui_paziente_content_first{
+  display: flex;
+  gap: 30px;
+}
+
+.colloqui_paziente_content_second{
+  font-size: 14px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.colloqui_paziente_content p {
+  font-size: 14px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.colloqui_paziente_content p strong {
+  font-weight: bold;
+  color: var(--primary-color-darker);
 }
 
 
