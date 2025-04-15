@@ -1,30 +1,51 @@
-import { useRef } from "react";
+import { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { it } from "date-fns/locale";
 
-export default function IconDate({ title, name, value, onChange, icon, required }) {
-    const inputRef = useRef(null);
+/**
+ * Componente con calendario visuale e formattazione umana della data
+ */
+export default function IconDate({ title, name, value, onChange, icon, required, showTime }) {
+    const [selectedDate, setSelectedDate] = useState(null);
 
-    const handleClick = () => {
-        if (inputRef.current && inputRef.current.showPicker) {
-            inputRef.current.showPicker(); // Chrome, Edge, etc.
-        } else {
-            inputRef.current.focus(); // fallback per altri browser
+    useEffect(() => {
+        if (value) {
+            setSelectedDate(new Date(value));
         }
+    }, [value]);
+
+    const handleChange = (date) => {
+        setSelectedDate(date);
+        const offset = date.getTimezoneOffset(); // es: -120 (minuti)
+        const localDate = new Date(date.getTime() - offset * 60000)
+            .toISOString()
+            .slice(0, 16); // rimuove secondi e Z
+    
+        const fakeEvent = { target: { name, value: localDate } };
+        onChange(fakeEvent);
     };
+    
 
     return (
         <>
             {title && <label>{title}</label>}
-            <div onClick={handleClick} className="input_main date_input" style={{ cursor: "pointer" }}>
+            <div className="input_main date_input">
                 <div className="input_icon">
-                    {icon && icon}
+                    {icon || <FaRegCalendarAlt />}
                 </div>
-                <input
-                    ref={inputRef}
-                    type="date"
-                    name={name}
-                    value={value}
-                    onChange={onChange}
+                <DatePicker
+                    selected={selectedDate}
+                    onChange={handleChange}
+                    showTimeSelect={showTime}
+                    timeFormat="HH:mm"
+                    timeIntervals={15}
+                    dateFormat={showTime ? "dd MMMM yyyy 'alle' HH:mm" : "dd MMMM yyyy"}
+                    placeholderText="Seleziona una data"
                     required={required}
+                    locale={it}
+                    className="custom_date_input"
                 />
             </div>
         </>

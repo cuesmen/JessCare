@@ -6,6 +6,7 @@ import { FaCheckCircle } from 'react-icons/fa';
 import GeneralNavigation from '../../components/GeneralNavigation/general_navigation';
 import { useNavigate } from 'react-router-dom';
 import { LuBookPlus } from "react-icons/lu";
+import { IoArrowBackCircle } from "react-icons/io5";
 
 const ColloquiWrapper = () => {
   const [selectedView, setSelectedView] = useState(null);
@@ -19,13 +20,13 @@ const ColloquiWrapper = () => {
 
   useEffect(() => {
     if (statusQuery === "lista") {
-      setSelectedView("Lista Generale");
+      setSelectedView("lista");
       setBreadcrumbs([
         { label: "Colloqui", path: "/colloqui", active: false, onClick: "reloadCOLL" },
         { label: "Lista Generale", path: `/colloqui?&search=lista`, active: true },
       ]);
     } else if (statusQuery === "paziente") {
-      setSelectedView("Cerca Paziente");
+      setSelectedView("paziente");
       setBreadcrumbs([
         { label: "Colloqui", path: "/colloqui", active: false, onClick: "reloadCOLL" },
         { label: "Cerca Paziente", path: `/colloqui?&search=paziente`, active: true },
@@ -42,7 +43,12 @@ const ColloquiWrapper = () => {
       <GeneralNavigation
         breadcrumbs={breadcrumbs}
         icon1={<LuBookPlus />}
-        icon1OnClick={() => navigate("/colloquio")}
+        icon1OnClick={() => navigate(`/colloquio-aggiungi?&search=${selectedView}`)}
+        icon2={selectedView ? <IoArrowBackCircle /> : null}
+        icon2OnClick={() => {
+          navigate("/colloqui");
+          window.location.reload();
+        }}
       />
       {!selectedView ? (
         <div className=''>
@@ -52,18 +58,18 @@ const ColloquiWrapper = () => {
               onClick={() => navigate("/colloqui?&search=lista")}
             >
               <a><SiStagetimer /></a>
-              Lista Generale
+              Lista generale
             </div>
             <div
               className="pazienti_intro_div"
               onClick={() => navigate("/colloqui?&search=paziente")}
             >
               <a><FaCheckCircle /></a>
-              Cerca Paziente
+              Cerca per paziente
             </div>
           </div>
         </div>
-      ) : selectedView === "Lista Generale" ? (
+      ) : selectedView === "lista" ? (
         <ColloquiLista />
       ) : (
         <ColloquiPaziente />

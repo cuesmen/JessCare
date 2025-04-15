@@ -16,6 +16,7 @@ import PazienteAdd from '../pages/Pazienti/PazienteAdd/PazienteAdd';
 import AppuntamentiAdd from '../pages/Appuntamenti/AppuntamentiAdd/AppuntamentiAdd';
 import ColloquiWrapper from '../pages/Colloqui/ColloquiWrapper';
 import ColloquioVisualize from '../pages/Colloqui/ColloquioVisualize/ColloquioVisualize';
+import ColloquioAdd from '../pages/Colloqui/ColloquioAdd/ColloquioAdd';
 
 // Componente per proteggere le rotte (mostra un loader se ancora in caricamento)
 const ProtectedRoute = ({ children }) => {
@@ -58,6 +59,8 @@ const AppRoutes = () => {
                       <Route path="/appuntamento-modifica" element={<AppuntamentiAdd modify={true} />} />
                       <Route path="/colloqui" element={<ColloquiWrapper />} />
                       <Route path="/colloquio-visualizza" element={<ColloquioVisualize />} />
+                      <Route path="/colloquio-aggiungi" element={<ColloquioAdd />} />
+                      <Route path="/colloquio-modifica" element={<ColloquioAdd modify={true}/>} />
                       <Route path="*" element={<Navigate to="/dashboard" replace />} />
                     </Routes>
               </ProtectedRoute>
