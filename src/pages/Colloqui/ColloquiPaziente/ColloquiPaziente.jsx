@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { supabase } from '../../supabaseClient';
-import { useLoader } from "../../main/LoaderContext";
-import IconSelect from '../../components/IconSelect';
+import React, { useEffect, useState, useCallback } from 'react';
+import { supabase } from '../../../supabaseClient';
+import { useLoader } from "../../../main/LoaderContext";
+import IconSelect from '../../../components/IconSelect';
 import { FaUser } from 'react-icons/fa';
-import { IoMdCloseCircle } from "react-icons/io";
+import ColloquiPazCard from './ColloquiPazCard';
+import { useNavigate } from 'react-router-dom';
 
 export default function ColloquiPaziente() {
     const { showLoader, hideLoader } = useLoader();
@@ -11,6 +12,10 @@ export default function ColloquiPaziente() {
     const [selectedPaziente, setSelectedPaziente] = useState('');
     const [colloqui, setColloqui] = useState([]);
     const [expandedColloquio, setExpandedColloquio] = useState(null);
+    const navigate = useNavigate();
+
+    const queryParams = new URLSearchParams(location.search);
+    const paz_id_to_search = queryParams.get('paz_id_to_search');
 
     useEffect(() => {
         const fetchPazienti = async () => {
@@ -36,7 +41,7 @@ export default function ColloquiPaziente() {
         fetchPazienti();
     }, []);
 
-    const handleSearchColloqui = async () => {
+    const handleSearchColloqui = useCallback(async () => {
         if (!selectedPaziente) return;
         showLoader();
         try {
@@ -47,23 +52,40 @@ export default function ColloquiPaziente() {
                     date,
                     duration,
                     notes,
-                    Paziente (name, surname)
+                    Paziente (id, name, surname)
                 `)
                 .eq('id_paziente', selectedPaziente)
                 .order('date', { ascending: false });
+
             if (error) {
                 console.error('Error fetching colloqui:', error);
             } else {
                 setColloqui(data);
+                if (data && data.length > 0) {
+                    const idToSearch = data[0].Paziente.id;
+                    const currentParams = new URLSearchParams(window.location.search);
+                    currentParams.set('paz_id_to_search', idToSearch);
+                    const newUrl = `${window.location.pathname}?${currentParams.toString()}`;
+                    window.history.replaceState(null, '', newUrl);
+                }
             }
         } finally {
             hideLoader();
         }
-    };
+    }, [selectedPaziente, showLoader, hideLoader]);
+
 
     const toggleExpand = (id) => {
         setExpandedColloquio(expandedColloquio === id ? null : id);
     };
+
+    useEffect(() => {
+        if (paz_id_to_search) {
+            setSelectedPaziente(paz_id_to_search);
+            handleSearchColloqui();
+        }
+    }, [paz_id_to_search, handleSearchColloqui]);
+
 
     return (
         <>
@@ -80,33 +102,20 @@ export default function ColloquiPaziente() {
                     Cerca Colloqui
                 </button>
                 <div className="colloqui-paziente-results">
-                    {colloqui.map((colloquio) => (
-                        <div
-                            key={colloquio.id}
-                            className={`colloqui_paziente_card ${expandedColloquio === colloquio.id ? 'expanded' : ''
-                                }`}
-                        >
-                            <div
-                                className="colloqui_paziente_toggle"
-                                onClick={() => toggleExpand(colloquio.id)}
-                            >
-                                <IoMdCloseCircle />
-                            </div>
-                            <div className="colloqui_paziente_content">
-                                <div className='colloqui_paziente_content_first'>
-                                    <p><strong>Data:</strong> {new Date(colloquio.date).toLocaleDateString()}</p>
-                                    <p><strong>Durata:</strong> {colloquio.duration} minuti</p>
-                                </div>
-                                {expandedColloquio === colloquio.id && (
-                                    <>
-                                        <div className='colloqui_paziente_content_second'>
-                                            <p><strong>Note:</strong> {colloquio.notes}</p>
-                                        </div>
-                                    </>
-                                )}
-                            </div>
+                    {colloqui.length > 0 ? (
+                        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                            {colloqui.map((colloquio) => (
+                                <ColloquiPazCard
+                                    colloquio={colloquio}
+                                    toggleExpand={toggleExpand}
+                                    expandedColloquio={expandedColloquio}
+                                    navigate={navigate}
+                                />
+                            ))}
                         </div>
-                    ))}
+                    ) : (
+                        <p>Nessun colloquio disponibile.</p>
+                    )}
                 </div>
             </div>
         </>

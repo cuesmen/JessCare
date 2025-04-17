@@ -172,8 +172,9 @@
 .colloqui-paziente-results{
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 20px 20px 0px 20px;
+  gap: 15px;
+  padding: 0px 20px 0px 20px;
+  width: 100%;
 }
 
 
@@ -190,6 +191,8 @@
   flex-direction: row-reverse;
   max-height: 75px;
   transition: all 0.3s ease;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .colloqui_paziente_card.expanded {
@@ -199,6 +202,9 @@
 
 .colloqui_paziente_toggle {
   color: var(--primary-color-darker);
+  position: absolute;
+  top:7px;
+  right:5px;
   font-size: 30px;
   display: flex;
   justify-content: center;
@@ -233,6 +239,10 @@
   overflow-wrap: break-word;
   word-break: break-word;
   white-space: normal;
+}
+
+.colloqui_paziente_content_second button{
+  margin-top: 15px;
 }
 
 .colloqui_paziente_content p {

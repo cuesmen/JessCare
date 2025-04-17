@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ColloquiLista from './ColloquiLista';
-import ColloquiPaziente from './ColloquiPaziente';
+import ColloquiPaziente from './ColloquiPaziente/ColloquiPaziente';
 import { SiStagetimer } from 'react-icons/si';
 import { FaCheckCircle } from 'react-icons/fa';
 import GeneralNavigation from '../../components/GeneralNavigation/general_navigation';

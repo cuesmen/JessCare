@@ -63,11 +63,20 @@ const ColloquioVisualize = () => {
     return null; // Loader will be shown by `useLoader`
   }
 
+  const getSecondBreadcrumb = () => {
+    if (search === 'paziente') {
+      return { label: "Cerca Paziente", path: `/colloqui?search=pazienti`, active: false };
+    } else {
+      return { label: "Lista Generale", path: `/colloqui?search=lista`, active: false };
+    }
+  };
+
   const breadcrumbs = [
     { label: "Colloqui", path: "/colloqui", active: false },
-    { label: "Lista Generale", path: `/colloqui?&search=lista`, active: false },
+    getSecondBreadcrumb(),
     { label: "Dettagli Colloquio", path: `/colloquio-visualizza?id=${colloquio.id}`, active: true },
   ];
+
 
   return (
     <div className="MainDiv ColloquiMainDiv">
@@ -77,7 +86,6 @@ const ColloquioVisualize = () => {
         icon1OnClick={() => navigate(-1)}
       />
       <h1>Dettagli Colloquio</h1>
-      <p><strong>ID:</strong> {colloquio.id}</p>
       <p><strong>Paziente:</strong> {colloquio.Paziente.name} {colloquio.Paziente.surname}</p>
       <p><strong>Data:</strong> {new Date(colloquio.date).toLocaleDateString()}</p>
       <p><strong>Durata:</strong> {colloquio.duration} minuti</p>
